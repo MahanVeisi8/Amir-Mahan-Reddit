@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:Amir_Mahan_Reddit/Basic Classes/Post.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -20,7 +21,7 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[
                   IconButton(
                     icon: Icon(Icons.home_filled),
-                    color: Color.fromARGB(214, 21, 237, 230),
+                    color: Color.fromARGB(236, 27, 241, 234),
                     onPressed: () {},
                   ),
                   IconButton(
