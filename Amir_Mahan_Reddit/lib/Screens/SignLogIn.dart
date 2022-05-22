@@ -1,3 +1,4 @@
+import 'package:Amir_Mahan_Reddit/Screens/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_launcher_icons/android.dart';
 import 'package:flutter_launcher_icons/constants.dart';
@@ -12,8 +13,6 @@ import 'package:Amir_Mahan_Reddit/Screens/SignLogIn.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 class LoginSignupScreen extends StatefulWidget {
-
-
   @override
   LoginSignupScreenState createState() => LoginSignupScreenState();
 }
@@ -35,10 +34,9 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
           Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/signInBackground2.jpg"),
-                  fit: BoxFit.cover,
-                )
-            ),
+              image: AssetImage("assets/images/signInBackground2.jpg"),
+              fit: BoxFit.cover,
+            )),
           ),
           Positioned(
             top: 0,
@@ -271,7 +269,6 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                     color: Colors.grey,
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
-
                   ),
                   contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 0),
                   border: OutlineInputBorder(
@@ -305,7 +302,6 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                     color: Colors.grey,
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
-
                   ),
                   contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 0),
                   border: OutlineInputBorder(
@@ -339,7 +335,6 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                     color: Colors.grey,
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
-
                   ),
                   contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 0),
                   border: OutlineInputBorder(
@@ -384,7 +379,6 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
           //   maxLines: 1,
           //
           // ),
-
 
           // buildTextField(MaterialCommunityIcons.account_outline, "User Name",
           //     false, false),
@@ -519,7 +513,7 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
           side: BorderSide(width: 1, color: Colors.grey),
           minimumSize: Size(145, 40),
           shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           primary: Colors.white,
           backgroundColor: backgroundColor),
       child: Row(
@@ -551,14 +545,22 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
             String userName = userNameController.text;
             String email = emailController.text;
             String password = passwordController.text;
-            RegExp regexForEmail = RegExp(
-                r'^[a-zA-Z0-9]+@gmail.com$');
+            RegExp regexForEmail = RegExp(r'^[a-zA-Z0-9]+@gmail.com$');
             RegExp regexForLowerCase = RegExp(r'[a-z]+');
             RegExp regexForUpperCase = RegExp(r'[A-Z]+');
             RegExp regexForNumber = RegExp(r'[0-9]+');
-            bool validPassword = password.length >= 8 && regexForLowerCase.hasMatch(password)
-                && regexForUpperCase.hasMatch(password) && regexForNumber.hasMatch(password);
+            bool validPassword = password.length >= 8 &&
+                regexForLowerCase.hasMatch(password) &&
+                regexForUpperCase.hasMatch(password) &&
+                regexForNumber.hasMatch(password);
             // bool validEmail = regexForEmail.hasMatch(email);
+            // !!!!!!!!!!!!! MUST MOVE THIS PART TO ELSE BEFORE MERGE !!!!!!!!!!!!!
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
+            // welcomePage replaced with HomePage
+            // !!!!!!!!!!!!! MUST MOVE THIS PART TO ELSE BEFORE MERGE !!!!!!!!!!!!!
             if (userName.isEmpty || email.isEmpty || password.isEmpty) {
               showDialog(
                   context: context,
@@ -576,14 +578,14 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                       ],
                     );
                   });
-            }
-            else if(!validPassword){
+            } else if (!validPassword) {
               showDialog(
                   context: context,
                   builder: (context) {
                     return AlertDialog(
                       title: Text("Error"),
-                      content: Text("Password must contain atleast one lowercase, one uppercase, one number and atleast 8 characters"),
+                      content: Text(
+                          "Password must contain atleast one lowercase, one uppercase, one number and atleast 8 characters"),
                       actions: [
                         FlatButton(
                           child: Text("Ok"),
@@ -594,8 +596,7 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                       ],
                     );
                   });
-            }
-            else if(!regexForEmail.hasMatch(email)){
+            } else if (!regexForEmail.hasMatch(email)) {
               showDialog(
                   context: context,
                   builder: (context) {
@@ -612,16 +613,7 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                       ],
                     );
                   });
-            }
-            else{
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => WelcomePage()
-                ),
-              );
-
-            }
+            } else {}
           },
           child: Container(
             height: 90,
@@ -640,25 +632,25 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                 ]),
             child: !showShadow
                 ? Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    // colors: [Colors.orange[200], Colors.red[400]],
-                      colors: [Colors.orange, Colors.red],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight),
-                  borderRadius: BorderRadius.circular(30),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.black.withOpacity(.3),
-                        spreadRadius: 1,
-                        blurRadius: 2,
-                        offset: Offset(0, 1))
-                  ]),
-              child: Icon(
-                Icons.arrow_forward,
-                color: Colors.white,
-              ),
-            )
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            // colors: [Colors.orange[200], Colors.red[400]],
+                            colors: [Colors.orange, Colors.red],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight),
+                        borderRadius: BorderRadius.circular(30),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black.withOpacity(.3),
+                              spreadRadius: 1,
+                              blurRadius: 2,
+                              offset: Offset(0, 1))
+                        ]),
+                    child: Icon(
+                      Icons.arrow_forward,
+                      color: Colors.white,
+                    ),
+                  )
                 : Center(),
           ),
         ),
@@ -702,8 +694,7 @@ void showButtomToast() => Fluttertoast.showToast(
     timeInSecForIosWeb: 2,
     backgroundColor: Colors.red,
     textColor: Colors.white,
-    fontSize: 16.0
-);
+    fontSize: 16.0);
 
 // void showButtomToast() {
 //   Fluttertoast.showToast(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:Amir_Mahan_Reddit/Screens/SignLogIn.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key key}) : super(key: key);
