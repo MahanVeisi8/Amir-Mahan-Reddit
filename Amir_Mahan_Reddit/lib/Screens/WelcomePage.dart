@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:Amir_Mahan_Reddit/Screens/SignLogIn.dart';
 
 class WelcomePage extends StatefulWidget {
-  const WelcomePage({Key? key}) : super(key: key);
+  const WelcomePage({Key key}) : super(key: key);
 
   @override
   State<WelcomePage> createState() => _WelcomePageState();
@@ -47,12 +47,12 @@ class _WelcomePageState extends State<WelcomePage> {
                             child: Container(
                               child: Flexible(
                                   child: Text(
-                                    'Welcome to MAHAN',
-                                    style: TextStyle(
-                                      color: Color(0xFF1e1f15),
-                                      fontSize: 30,
-                                    ),
-                                  )),
+                                'Welcome to MAHAN',
+                                style: TextStyle(
+                                  color: Color(0xFF1e1f15),
+                                  fontSize: 30,
+                                ),
+                              )),
                             ),
                           ),
                         ),
@@ -72,12 +72,12 @@ class _WelcomePageState extends State<WelcomePage> {
                             child: Container(
                               child: Flexible(
                                   child: Text(
-                                    'Welcome to MAHAN',
-                                    style: TextStyle(
-                                      color: Color(0xFF1e1f15),
-                                      fontSize: 30,
-                                    ),
-                                  )),
+                                'Welcome to MAHAN',
+                                style: TextStyle(
+                                  color: Color(0xFF1e1f15),
+                                  fontSize: 30,
+                                ),
+                              )),
                             ),
                           ),
                         ),
@@ -91,6 +91,5 @@ class _WelcomePageState extends State<WelcomePage> {
         ),
       ),
     );
-
   }
 }
