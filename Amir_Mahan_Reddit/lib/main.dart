@@ -2,6 +2,7 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:Amir_Mahan_Reddit/Splash/SplashScreen.dart';
 import 'package:Amir_Mahan_Reddit/Screens/SignLogIn.dart';
+import 'package:Amir_Mahan_Reddit/Screens/HomePage.dart';
 void main() {
   runApp(MyApp());
 }
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
           // fit: BoxFit.cover,
         ),
         nextScreen: LoginSignupScreen(),
-
+        // nextScreen: HomePage(),
         // splashTransition: SplashTransition.rotationTransition,
         backgroundColor: Colors.redAccent,
       ),

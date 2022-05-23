@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:Amir_Mahan_Reddit/Basic Classes/Post.dart';
+import 'package:Amir_Mahan_Reddit/Screens/SettingPage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -42,7 +42,12 @@ class _HomePageState extends State<HomePage> {
                   IconButton(
                     icon: Icon(Icons.settings),
                     color: Colors.white60,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Setting()));
+                    },
                   ),
                 ],
               )),
