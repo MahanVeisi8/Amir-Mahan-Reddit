@@ -64,6 +64,8 @@ flutter:
     - family: Gotham
       fonts:
         - asset: fonts/Gotham-Light.otf
+    - family: Gotham-Bold
+      fonts:
         - asset: fonts/Gotham-Black.otf
   assets:
     - assets/images/

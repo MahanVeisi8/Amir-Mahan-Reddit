@@ -28,6 +28,16 @@ class Post {
     numComments = 0;
   }
 
+  void addLike(User liker) {
+    likes.add(liker);
+    numLikes++;
+  }
+
+  void addDisike(User disliker) {
+    dislikes.add(disliker);
+    numDislikes++;
+  }
+
   Community getCommunity() {
     return community;
   }
