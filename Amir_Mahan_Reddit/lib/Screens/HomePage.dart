@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:Amir_Mahan_Reddit/Screens/SettingPage.dart';
-
+import 'package:Amir_Mahan_Reddit/Widgets/sideBarDrawer.dart';
+import 'package:Amir_Mahan_Reddit/Widgets/SideBarButtonWidget.dart';
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
 
@@ -13,6 +14,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.black87,
+        endDrawer: NavigationDrawerWidget(),
+        appBar: AppBar(
+          // title: Text('Reddit'),
+          // centerTitle: true,
+          backgroundColor: Colors.black87,
+        ),
         bottomNavigationBar: BottomAppBar(
           child: Container(
               color: Color.fromARGB(227, 0, 0, 0),

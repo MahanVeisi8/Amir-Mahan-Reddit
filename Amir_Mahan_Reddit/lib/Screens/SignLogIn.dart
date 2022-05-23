@@ -36,7 +36,8 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                 image: DecorationImage(
               image: AssetImage("assets/images/signInBackground2.jpg"),
               fit: BoxFit.cover,
-            )),
+            )
+            ),
           ),
           Positioned(
             top: 0,
