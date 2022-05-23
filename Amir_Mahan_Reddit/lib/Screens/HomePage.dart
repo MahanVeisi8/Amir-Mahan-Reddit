@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:Amir_Mahan_Reddit/Basic Classes/Post.dart';
+import 'package:Amir_Mahan_Reddit/BasicClasses/Post.dart';
+import 'package:Amir_Mahan_Reddit/BasicClasses/Users.dart';
+
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key key}) : super(key: key);
-
+  const HomePage({Key key, this.user}) : super(key: key);
+  final User user;
   @override
   State<HomePage> createState() => _HomePageState();
 }

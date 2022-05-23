@@ -1,5 +1,5 @@
-import 'package:Amir_Mahan_Reddit/Basic Classes/Post.dart';
-import 'package:Amir_Mahan_Reddit/Basic Classes/User.dart';
+import 'package:Amir_Mahan_Reddit/BasicClasses/Post.dart';
+import 'package:Amir_Mahan_Reddit/BasicClasses/Users.dart';
 import 'package:flutter/cupertino.dart';
 
 class Comment {

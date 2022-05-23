@@ -1,16 +1,14 @@
 import 'package:Amir_Mahan_Reddit/Screens/HomePage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_launcher_icons/android.dart';
-import 'package:flutter_launcher_icons/constants.dart';
-import 'package:flutter_launcher_icons/custom_exceptions.dart';
-import 'package:flutter_launcher_icons/ios.dart';
-import 'package:flutter_launcher_icons/main.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:Amir_Mahan_Reddit/Screens/WelcomePage.dart';
-import 'package:Amir_Mahan_Reddit/main.dart';
 import 'package:Amir_Mahan_Reddit/configuration/Palette.dart';
-import 'package:Amir_Mahan_Reddit/Screens/SignLogIn.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:Amir_Mahan_Reddit/BasicClasses/Community.dart';
+import 'package:Amir_Mahan_Reddit/BasicClasses/Comment.dart';
+import 'package:Amir_Mahan_Reddit/BasicClasses/Post.dart';
+import 'package:Amir_Mahan_Reddit/BasicClasses/Users.dart';
+
 
 class LoginSignupScreen extends StatefulWidget {
   @override
@@ -22,6 +20,7 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
   bool isMale = true;
   bool isRememberMe = false;
   final regexForEmail = RegExp(r'^[a-zA-Z0-9]+@gmail.com$');
+  User user;
   TextEditingController userNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -554,13 +553,13 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                 regexForUpperCase.hasMatch(password) &&
                 regexForNumber.hasMatch(password);
             // bool validEmail = regexForEmail.hasMatch(email);
-            // !!!!!!!!!!!!! MUST MOVE THIS PART TO ELSE BEFORE MERGE !!!!!!!!!!!!!
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage()),
-            );
-            // welcomePage replaced with HomePage
-            // !!!!!!!!!!!!! MUST MOVE THIS PART TO ELSE BEFORE MERGE !!!!!!!!!!!!!
+            // // !!!!!!!!!!!!! MUST MOVE THIS PART TO ELSE BEFORE MERGE !!!!!!!!!!!!!
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => HomePage()),
+            // );
+            // // welcomePage replaced with HomePage
+            // // !!!!!!!!!!!!! MUST MOVE THIS PART TO ELSE BEFORE MERGE !!!!!!!!!!!!!
             if (userName.isEmpty || email.isEmpty || password.isEmpty) {
               showDialog(
                   context: context,
@@ -596,7 +595,8 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                       ],
                     );
                   });
-            } else if (!regexForEmail.hasMatch(email)) {
+            }
+            else if (!regexForEmail.hasMatch(email)) {
               showDialog(
                   context: context,
                   builder: (context) {
@@ -613,7 +613,16 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                       ],
                     );
                   });
-            } else {}
+            }
+            else {
+              user = User(userName, email, password, isMale);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage(
+                  user: user,
+                )),
+              );
+            }
           },
           child: Container(
             height: 90,
