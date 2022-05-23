@@ -1,7 +1,8 @@
 import 'package:Amir_Mahan_Reddit/BasicClasses/Post.dart';
+
 class User {
   String username;
-  List<Post> posts;
+  List<Post> savedPosts;
   String _email;
   String _password;
   int numPosts;
@@ -9,7 +10,7 @@ class User {
   bool isMale;
   User(String username, String email, String password, bool isMale) {
     this.username = username;
-    this.posts = <Post>[];
+    this.savedPosts = <Post>[];
     this._email = email;
     this._password = password;
     this.numPosts = 0;
@@ -25,7 +26,7 @@ class User {
   }
 
   List<Post> getPosts() {
-    return posts;
+    return savedPosts;
   }
 
   int getNumPosts() {
