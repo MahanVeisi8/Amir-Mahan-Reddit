@@ -1,3 +1,4 @@
+import 'package:Amir_Mahan_Reddit/BasicClasses/Community.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,24 +30,72 @@ class _UserPageState extends State<UserPage> {
         backgroundColor: Colors.transparent,
       ),
       extendBodyBehindAppBar: true,
-      body: SizedBox(
-        height: MediaQuery.of(context).size.height/2,
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(30),
-              bottomRight: Radius.circular(30),
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height/2,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30),
+                  ),
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/AlliSherlock.jpg'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
             ),
-            image: DecorationImage(
-              image: AssetImage('assets/images/AlliSherlock.jpg'),
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
+            Positioned(
+              top: MediaQuery.of(context).size.height/2 * 0.80,
+              left: MediaQuery.of(context).size.width/2 * 0.12,
+              child:  Container(
+                width: MediaQuery.of(context).size.width,
+                height: 50,
+                child: Text(
+                  'Sarah Absdsfsfsads',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                ),
+              ),
+            Positioned(
+              top: MediaQuery.of(context).size.height * 0.7,
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                // height: ,
+                height: 200,
+                // width: 300 ,
+                // padding: EdgeInsets.all(10),
+                // decoration: BoxDecoration(
+                //   borderRadius: BorderRadius.only(
+                //     bottomLeft: Radius.circular(30),
+                //     bottomRight: Radius.circular(30),
+                //   ),
+                //   color: Colors.white,
+                // ),
+                child: Text(
+                  'Sarah Absdsfsfsads',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              )
+              ),
+           ]
+         ),
       ),
     );
   }
-}
+  }
+
 
 
 
