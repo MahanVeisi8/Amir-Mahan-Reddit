@@ -104,16 +104,31 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                           GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              margin: EdgeInsets.only(right: 12),
-                              child: Icon(
-                                Icons.bookmark_border_outlined,
-                                size: 30,
-                                color: Color.fromARGB(189, 255, 255, 255),
-                              ),
-                            ),
-                          ),
+                              onTap: () {
+                                //saving
+                                setState(() {
+                                  posts[index]
+                                      .setIsSaved(!posts[index].getIsSaved());
+                                });
+                              },
+                              child: (!posts[index].getIsSaved())
+                                  ? Container(
+                                      margin: EdgeInsets.only(right: 12),
+                                      child: Icon(
+                                        Icons.bookmark_border_outlined,
+                                        size: 30,
+                                        color:
+                                            Color.fromARGB(189, 255, 255, 255),
+                                      ))
+                                  : Container(
+                                      margin: EdgeInsets.only(right: 12),
+                                      child: Icon(
+                                        Icons.bookmark_outlined,
+                                        size: 30,
+                                        color:
+                                            Color.fromARGB(189, 255, 255, 255),
+                                      ),
+                                    )),
                         ],
                       ),
                       //caption:
@@ -196,7 +211,7 @@ class _HomePageState extends State<HomePage> {
                                   // });
                                 },
                                 child: Container(
-                                  margin: EdgeInsets.only(
+                                  margin: const EdgeInsets.only(
                                       top: 10, left: 10, right: 0, bottom: 10),
                                   child: Icon(
                                     Icons.thumb_down_alt_outlined,

@@ -6,6 +6,9 @@ import 'Community.dart';
 class Post {
   User Poster;
   Community community;
+  bool isLiked;
+  bool isDisLiked;
+  bool isSaved;
   String createdAt;
   String description;
   String title;
@@ -28,6 +31,10 @@ class Post {
     numLikes = 0;
     numDislikes = 0;
     numComments = 0;
+    //move all these fields to User
+    isSaved = false;
+    isLiked = false;
+    isDisLiked = false;
   }
 
   void addLike(User liker) {
@@ -38,6 +45,10 @@ class Post {
   void addDisike(User disliker) {
     dislikes.add(disliker);
     numDislikes++;
+  }
+
+  bool getIsSaved() {
+    return isSaved;
   }
 
   Community getCommunity() {
@@ -82,5 +93,9 @@ class Post {
 
   String getDescription() {
     return description;
+  }
+
+  void setIsSaved(bool x) {
+    isSaved = x;
   }
 }
