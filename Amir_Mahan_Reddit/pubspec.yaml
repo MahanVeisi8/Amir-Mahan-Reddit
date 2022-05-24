@@ -68,7 +68,13 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
+  fonts:
+    - family: Gotham
+      fonts:
+        - asset: fonts/Gotham-Light.otf
+    - family: Gotham-Bold
+      fonts:
+        - asset: fonts/Gotham-Black.otf
   assets:
     - assets/images/
   # The following line ensures that the Material Icons font is

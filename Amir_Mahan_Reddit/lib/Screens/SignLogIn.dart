@@ -9,7 +9,6 @@ import 'package:Amir_Mahan_Reddit/BasicClasses/Comment.dart';
 import 'package:Amir_Mahan_Reddit/BasicClasses/Post.dart';
 import 'package:Amir_Mahan_Reddit/BasicClasses/Users.dart';
 
-
 class LoginSignupScreen extends StatefulWidget {
   @override
   LoginSignupScreenState createState() => LoginSignupScreenState();
@@ -555,11 +554,11 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                 regexForNumber.hasMatch(password);
             // bool validEmail = regexForEmail.hasMatch(email);
             // // !!!!!!!!!!!!! MUST MOVE THIS PART TO ELSE BEFORE MERGE !!!!!!!!!!!!!
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => HomePage()),
-            // );
-            // // welcomePage replaced with HomePage
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
+            // welcomePage replaced with HomePage
             // // !!!!!!!!!!!!! MUST MOVE THIS PART TO ELSE BEFORE MERGE !!!!!!!!!!!!!
             if (userName.isEmpty || email.isEmpty || password.isEmpty) {
               showDialog(
@@ -596,8 +595,7 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                       ],
                     );
                   });
-            }
-            else if (!regexForEmail.hasMatch(email)) {
+            } else if (!regexForEmail.hasMatch(email)) {
               showDialog(
                   context: context,
                   builder: (context) {
@@ -614,14 +612,14 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                       ],
                     );
                   });
-            }
-            else {
+            } else {
               user = User(userName, email, password, isMale);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HomePage(
-                  user: user,
-                )),
+                MaterialPageRoute(
+                    builder: (context) => HomePage(
+                          user: user,
+                        )),
               );
             }
           },

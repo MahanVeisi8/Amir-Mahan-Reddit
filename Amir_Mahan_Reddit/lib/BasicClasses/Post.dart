@@ -7,7 +7,8 @@ class Post {
   User Poster;
   Community community;
   String createdAt;
-  String caption;
+  String description;
+  String title;
   List<User> likes;
   List<User> dislikes;
   List<User> commenters;
@@ -15,17 +16,28 @@ class Post {
   int numDislikes;
   int numComments;
 
-  Post(User Poster, Community community, String caption) {
+  Post(User Poster, Community community, String title, String description) {
     this.Poster = Poster;
     this.community = community;
     this.createdAt = DateTime.now().toString();
-    this.caption = caption;
+    this.title = title;
+    this.description = description;
     likes = <User>[];
     dislikes = <User>[];
     commenters = <User>[];
     numLikes = 0;
     numDislikes = 0;
     numComments = 0;
+  }
+
+  void addLike(User liker) {
+    likes.add(liker);
+    numLikes++;
+  }
+
+  void addDisike(User disliker) {
+    dislikes.add(disliker);
+    numDislikes++;
   }
 
   Community getCommunity() {
@@ -40,8 +52,8 @@ class Post {
     return createdAt;
   }
 
-  String getCaption() {
-    return caption;
+  String getTitle() {
+    return title;
   }
 
   List<User> getLikes() {
@@ -66,5 +78,9 @@ class Post {
 
   int getNumComments() {
     return numComments;
+  }
+
+  String getDescription() {
+    return description;
   }
 }
