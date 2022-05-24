@@ -1,5 +1,7 @@
-import 'package:Amir_Mahan_Reddit/Basic Classes/User.dart';
-import 'package:Amir_Mahan_Reddit/Basic%20Classes/Community.dart';
+import 'package:Amir_Mahan_Reddit/BasicClasses/Users.dart';
+import 'package:Amir_Mahan_Reddit/BasicClasses/Community.dart';
+
+import 'Community.dart';
 
 class Post {
   User Poster;

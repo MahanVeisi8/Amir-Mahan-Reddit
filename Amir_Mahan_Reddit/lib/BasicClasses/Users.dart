@@ -1,5 +1,4 @@
-import 'package:Amir_Mahan_Reddit/Basic Classes/Post.dart';
-
+import 'package:Amir_Mahan_Reddit/BasicClasses/Post.dart';
 class User {
   String username;
   List<Post> posts;
@@ -7,14 +6,15 @@ class User {
   String _password;
   int numPosts;
   String createdAt;
-
-  User(String username, String email, String password) {
+  bool isMale;
+  User(String username, String email, String password, bool isMale) {
     this.username = username;
     this.posts = <Post>[];
     this._email = email;
     this._password = password;
     this.numPosts = 0;
     this.createdAt = DateTime.now().toString();
+    this.isMale = isMale;
   }
   String getEmail() {
     return _email;
