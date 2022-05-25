@@ -1,4 +1,8 @@
+import 'package:Amir_Mahan_Reddit/Screens/CommunitiesPage.dart';
 import 'package:flutter/material.dart';
+import 'package:Amir_Mahan_Reddit/Screens/SettingPage.dart';
+import 'package:Amir_Mahan_Reddit/Widgets/sideBarDrawer.dart';
+import 'package:Amir_Mahan_Reddit/Widgets/SideBarButtonWidget.dart';
 import 'package:Amir_Mahan_Reddit/BasicClasses/Post.dart';
 import 'package:Amir_Mahan_Reddit/BasicClasses/Users.dart';
 
@@ -54,6 +58,12 @@ class _HomePageState extends State<HomePage> {
     initializer();
     return Scaffold(
         backgroundColor: Colors.black87,
+        endDrawer: NavigationDrawerWidget(),
+        appBar: AppBar(
+          // title: Text('Reddit'),
+          // centerTitle: true,
+          backgroundColor: Color.fromARGB(248, 44, 44, 44),
+        ),
         body: Container(
           child: ListView.builder(
             itemCount: posts.length,
@@ -104,31 +114,16 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                           GestureDetector(
-                              onTap: () {
-                                //saving
-                                setState(() {
-                                  posts[index]
-                                      .setIsSaved(!posts[index].getIsSaved());
-                                });
-                              },
-                              child: (!posts[index].getIsSaved())
-                                  ? Container(
-                                      margin: EdgeInsets.only(right: 12),
-                                      child: Icon(
-                                        Icons.bookmark_border_outlined,
-                                        size: 30,
-                                        color:
-                                            Color.fromARGB(189, 255, 255, 255),
-                                      ))
-                                  : Container(
-                                      margin: EdgeInsets.only(right: 12),
-                                      child: Icon(
-                                        Icons.bookmark_outlined,
-                                        size: 30,
-                                        color:
-                                            Color.fromARGB(189, 255, 255, 255),
-                                      ),
-                                    )),
+                            onTap: () {},
+                            child: Container(
+                              margin: EdgeInsets.only(right: 12),
+                              child: Icon(
+                                Icons.bookmark_border_outlined,
+                                size: 30,
+                                color: Color.fromARGB(189, 255, 255, 255),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                       //caption:
@@ -211,7 +206,7 @@ class _HomePageState extends State<HomePage> {
                                   // });
                                 },
                                 child: Container(
-                                  margin: const EdgeInsets.only(
+                                  margin: EdgeInsets.only(
                                       top: 10, left: 10, right: 0, bottom: 10),
                                   child: Icon(
                                     Icons.thumb_down_alt_outlined,
@@ -289,12 +284,32 @@ class _HomePageState extends State<HomePage> {
                   IconButton(
                     icon: Icon(Icons.list_rounded),
                     color: Colors.white60,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (c, a1, a2) => CommunitiesPage(),
+                          transitionsBuilder: (c, anim, a2, child) =>
+                              FadeTransition(opacity: anim, child: child),
+                          transitionDuration: Duration(milliseconds: 200),
+                        ),
+                      );
+                    },
                   ),
                   IconButton(
                     icon: Icon(Icons.settings),
                     color: Colors.white60,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (c, a1, a2) => Setting(),
+                          transitionsBuilder: (c, anim, a2, child) =>
+                              FadeTransition(opacity: anim, child: child),
+                          transitionDuration: Duration(milliseconds: 200),
+                        ),
+                      );
+                    },
                   ),
                 ],
               )),
