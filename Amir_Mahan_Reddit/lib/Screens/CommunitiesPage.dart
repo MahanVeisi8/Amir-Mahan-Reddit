@@ -46,6 +46,18 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
   Widget build(BuildContext context) {
     initializer();
     return Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Color.fromARGB(248, 44, 44, 44),
+          title: Text(
+            "Communities",
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'Gotham',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
         body: Container(
           child: ListView.builder(
               itemCount: communities.length,
