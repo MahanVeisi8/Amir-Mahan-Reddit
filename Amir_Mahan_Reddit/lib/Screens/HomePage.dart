@@ -60,8 +60,13 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.black87,
         endDrawer: NavigationDrawerWidget(),
         appBar: AppBar(
-          // title: Text('Reddit'),
-          // centerTitle: true,
+          title: Text(
+            "Reddit",
+            style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'Gotham',
+                fontWeight: FontWeight.bold),
+          ),
           backgroundColor: Color.fromARGB(248, 44, 44, 44),
         ),
         body: Container(
