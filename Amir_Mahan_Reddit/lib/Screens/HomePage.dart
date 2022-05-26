@@ -1,4 +1,5 @@
 import 'package:Amir_Mahan_Reddit/Screens/CommunitiesPage.dart';
+import 'package:Amir_Mahan_Reddit/Screens/PostPage.dart';
 import 'package:flutter/material.dart';
 import 'package:Amir_Mahan_Reddit/Screens/SettingPage.dart';
 import 'package:Amir_Mahan_Reddit/Widgets/sideBarDrawer.dart';
@@ -6,6 +7,7 @@ import 'package:Amir_Mahan_Reddit/Widgets/SideBarButtonWidget.dart';
 import 'package:Amir_Mahan_Reddit/BasicClasses/Post.dart';
 import 'package:Amir_Mahan_Reddit/BasicClasses/Users.dart';
 
+import '../BasicClasses/Comment.dart';
 import '../BasicClasses/Community.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,6 +29,15 @@ class _HomePageState extends State<HomePage> {
         com,
         "hey motherfuckers! welcome to this app! this is the first caption!",
         "this is the long fucking caption that is supposed to be nothing just a long boring long bullshit long test"));
+
+    posts[0].addComment(new Comment("Yes And I Loooove it!!! U rock brooo ♥♥♥",
+        new User("matin", "email", "password", true), posts[0]));
+
+    posts[0].addComment(new Comment("Amazing!! ♥♥♥",
+        new User("Setareh", "email", "password", false), posts[0]));
+
+    posts[0].addComment(new Comment(
+        "Ridi.", new User("mahan", "email", "password", true), posts[0]));
 
     posts.add(new Post(new User("Setareh", "email", "password", false), com,
         "Woooowww this is aaammaaaazing!", "Awwwlieeee"));
@@ -75,7 +86,17 @@ class _HomePageState extends State<HomePage> {
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
                   onTap: () {
-                    // print("tapped");
+                    Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (c, a1, a2) => PostPage(
+                            post: posts[index],
+                            comments: posts[index].getComments(),
+                          ),
+                          transitionsBuilder: (c, anim, a2, child) =>
+                              FadeTransition(opacity: anim, child: child),
+                          transitionDuration: Duration(milliseconds: 200),
+                        ));
                   },
                   child: Material(
                     shadowColor: Colors.black,
@@ -266,58 +287,59 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         bottomNavigationBar: BottomAppBar(
+          color: Colors.transparent,
           child: Container(
-              color: Colors.black87,
+              // color: Colors.black87,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.home_filled),
-                    color: Color.fromARGB(236, 27, 241, 234),
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.search),
-                    color: Colors.white60,
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.add),
-                    color: Colors.white60,
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.list_rounded),
-                    color: Colors.white60,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder: (c, a1, a2) => CommunitiesPage(),
-                          transitionsBuilder: (c, anim, a2, child) =>
-                              FadeTransition(opacity: anim, child: child),
-                          transitionDuration: Duration(milliseconds: 200),
-                        ),
-                      );
-                    },
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.settings),
-                    color: Colors.white60,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder: (c, a1, a2) => Setting(),
-                          transitionsBuilder: (c, anim, a2, child) =>
-                              FadeTransition(opacity: anim, child: child),
-                          transitionDuration: Duration(milliseconds: 200),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              )),
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              IconButton(
+                icon: Icon(Icons.home_filled),
+                color: Color.fromARGB(236, 27, 241, 234),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: Icon(Icons.search),
+                color: Colors.white60,
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: Icon(Icons.add),
+                color: Colors.white60,
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: Icon(Icons.list_rounded),
+                color: Colors.white60,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (c, a1, a2) => CommunitiesPage(),
+                      transitionsBuilder: (c, anim, a2, child) =>
+                          FadeTransition(opacity: anim, child: child),
+                      transitionDuration: Duration(milliseconds: 200),
+                    ),
+                  );
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.settings),
+                color: Colors.white60,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (c, a1, a2) => Setting(),
+                      transitionsBuilder: (c, anim, a2, child) =>
+                          FadeTransition(opacity: anim, child: child),
+                      transitionDuration: Duration(milliseconds: 200),
+                    ),
+                  );
+                },
+              ),
+            ],
+          )),
         ));
   }
 }

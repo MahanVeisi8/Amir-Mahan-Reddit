@@ -34,6 +34,10 @@ class Comment {
     return user.username;
   }
 
+  int getNumLikes() {
+    return numLikes;
+  }
+
   String getText() {
     return text;
   }

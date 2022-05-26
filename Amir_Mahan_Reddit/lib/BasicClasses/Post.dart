@@ -1,5 +1,6 @@
 import 'package:Amir_Mahan_Reddit/BasicClasses/Users.dart';
 import 'package:Amir_Mahan_Reddit/BasicClasses/Community.dart';
+import 'package:Amir_Mahan_Reddit/BasicClasses/Comment.dart';
 
 import 'Community.dart';
 
@@ -12,6 +13,7 @@ class Post {
   List<User> likes;
   List<User> dislikes;
   List<User> commenters;
+  List<Comment> comments;
   int numLikes;
   int numDislikes;
   int numComments;
@@ -25,10 +27,10 @@ class Post {
     likes = <User>[];
     dislikes = <User>[];
     commenters = <User>[];
+    comments = <Comment>[];
     numLikes = 0;
     numDislikes = 0;
     numComments = 0;
-    
   }
 
   void addLike(User liker) {
@@ -36,11 +38,15 @@ class Post {
     numLikes++;
   }
 
+  void addComment(Comment comment) {
+    comments.add(comment);
+    numComments++;
+  }
+
   void addDisike(User disliker) {
     dislikes.add(disliker);
     numDislikes++;
   }
-
 
   Community getCommunity() {
     return community;
@@ -52,6 +58,10 @@ class Post {
 
   String getCreatedAt() {
     return createdAt;
+  }
+
+  List<Comment> getComments() {
+    return comments;
   }
 
   String getTitle() {
@@ -85,5 +95,4 @@ class Post {
   String getDescription() {
     return description;
   }
-
 }
