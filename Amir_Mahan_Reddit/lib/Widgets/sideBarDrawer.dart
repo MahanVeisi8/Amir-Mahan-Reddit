@@ -10,7 +10,8 @@ class NavigationDrawerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final name = 'Sarah Abs';
     final email = 'sarah@abs.com';
-    final String urlImage = 'https://pbs.twimg.com/media/E7CdHG3WQAANrwu.jpg';
+    final String urlImage =
+        'https://pbs.twimg.com/media/E7CdHG3WQAANrwu.jpg';
 
     return Drawer(
       child: Material(
@@ -25,8 +26,8 @@ class NavigationDrawerWidget extends StatelessWidget {
               onClicked: () => Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => UserPage(
                     // name: 'Sarah Abs',
-                    // urlImage: urlImage,
-                    ),
+                  // urlImage: urlImage,
+                ),
               )),
             ),
             Container(
@@ -114,6 +115,7 @@ class NavigationDrawerWidget extends StatelessWidget {
               CircleAvatar(
                 radius: 24,
                 backgroundColor: Color.fromARGB(236, 27, 241, 234),
+
                 child: Icon(Icons.add_comment_outlined, color: Colors.white),
               )
             ],
@@ -169,13 +171,15 @@ class NavigationDrawerWidget extends StatelessWidget {
         Navigator.of(context).push(MaterialPageRoute(
           // builder: (context) => UserPage(name: 'Sarah Abs', urlImage: 'https://pbs.twimg.com/media/E7CdHG3WQAANrwu.jpg'),
           builder: (context) => UserPage(),
-        ));
+        )
+        );
         break;
       case 1:
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => FavouritesPage(),
         ));
         break;
+
     }
   }
 }

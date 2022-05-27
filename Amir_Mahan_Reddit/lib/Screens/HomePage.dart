@@ -1,4 +1,5 @@
 import 'package:Amir_Mahan_Reddit/Screens/CommunitiesPage.dart';
+import 'package:Amir_Mahan_Reddit/Screens/OnSidebar/ProfilePage.dart';
 import 'package:Amir_Mahan_Reddit/Screens/PostPage.dart';
 import 'package:flutter/material.dart';
 import 'package:Amir_Mahan_Reddit/Screens/SettingPage.dart';
@@ -80,8 +81,71 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     initializer();
     return Scaffold(
-        backgroundColor: Colors.black87,
+        backgroundColor: Color(0xFF1F2833),
         endDrawer: NavigationDrawerWidget(),
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                child: Text(
+                  'Reddit',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
+                ),
+                decoration: BoxDecoration(
+                  color: Color(0xFF1F2833),
+                ),
+              ),
+              ListTile(
+                title: Text(
+                  'Home',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: Text(
+                  'Communities',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CommunitiesPage()));
+                },
+              ),
+              ListTile(
+                title: Text(
+                  'Settings',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => UserPage()));
+                },
+              ),
+            ],
+          ),
+        ),
         appBar: AppBar(
           title: Text(
             "Blueit",
@@ -90,7 +154,9 @@ class _HomePageState extends State<HomePage> {
                 fontFamily: 'Gotham',
                 fontWeight: FontWeight.bold),
           ),
-          backgroundColor: Color.fromARGB(248, 44, 44, 44),
+          centerTitle: true,
+
+          backgroundColor: Color(0xFF1F2833),
         ),
         body: Container(
           child: ListView.builder(
@@ -111,7 +177,7 @@ class _HomePageState extends State<HomePage> {
                         ));
                   },
                   child: Material(
-                    shadowColor: Colors.black,
+                    shadowColor: Color(0xFF1F2833),
                     color: Colors.transparent,
                     child: Column(children: [
                       Row(
@@ -299,9 +365,8 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         bottomNavigationBar: BottomAppBar(
-          color: Colors.transparent,
           child: Container(
-              // color: Colors.black87,
+              color: Color(0xFF1F2833),
               child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
@@ -351,7 +416,9 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ],
-          )),
-        ));
+          ),
+          ),
+        ),
+    );
   }
 }

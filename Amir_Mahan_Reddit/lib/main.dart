@@ -17,12 +17,13 @@ class MyApp extends StatelessWidget {
         // animationDuration: ,
         splash: Image.asset(
           'assets/images/image.png',
-          // fit: BoxFit.cover,
+          fit: BoxFit.fill,
         ),
+        splashIconSize: 1000,
         nextScreen: LoginSignupScreen(),
         // nextScreen: HomePage(),
         // splashTransition: SplashTransition.rotationTransition,
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Color(0xFF000000),
       ),
 
     );
