@@ -30,22 +30,26 @@ class _HomePageState extends State<HomePage> {
         "hey motherfuckers! welcome to this app! this is the first caption!",
         "this is the long fucking caption that is supposed to be nothing just a long boring long bullshit long test"));
 
-    posts[0].addComment(new Comment("Yes And I Loooove it!!! U rock brooo ♥♥♥",
+    posts[0].addComment(new Comment("Yes And I Loooove it!!! U rock brooo",
         new User("matin", "email", "password", true), posts[0]));
 
-    posts[0].addComment(new Comment("Amazing!! ♥♥♥",
+    posts[0].addComment(new Comment("Amazing!!",
         new User("Setareh", "email", "password", false), posts[0]));
 
     posts[0].addComment(new Comment(
         "Ridi.", new User("mahan", "email", "password", true), posts[0]));
-    posts[0].addComment(new Comment("Yes And I Loooove it!!! U rock brooo ♥♥♥",
-        new User("matin", "email", "password", true), posts[0]));
-
-    posts[0].addComment(new Comment("Amazing!! ♥♥♥",
-        new User("Setareh", "email", "password", false), posts[0]));
+    posts[0].addComment(new Comment("Namoosan Pashamam",
+        new User("Sobhan", "email", "password", true), posts[0]));
 
     posts[0].addComment(new Comment(
-        "Ridi.", new User("mahan", "email", "password", true), posts[0]));
+        "Dadash khode Reddit jeloye appetoon long mindaze bemowlaaa",
+        new User("Safi", "email", "password", false),
+        posts[0]));
+
+    posts[0].addComment(new Comment(
+        "Hamash ro khodam zadam. Feshar Bokhor Amir",
+        new User("mahan", "email", "password", true),
+        posts[0]));
 
     posts.add(new Post(new User("Setareh", "email", "password", false), com,
         "Woooowww this is aaammaaaazing!", "Awwwlieeee"));

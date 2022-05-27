@@ -231,16 +231,15 @@ class _PostPageState extends State<PostPage> {
                                       ),
                                     ),
                                     Container(
-                                        margin: EdgeInsets.only(left: 5),
                                         child: Text(
-                                          "u/" +
-                                              commentsViewed[index]
-                                                  .getUserName(),
-                                          style: TextStyle(
-                                              fontFamily: 'Gotham',
-                                              fontSize: 16,
-                                              color: Colors.white),
-                                        ))
+                                      "u/" +
+                                          commentsViewed[index].getUserName(),
+                                      style: TextStyle(
+                                          fontFamily: 'Gotham',
+                                          fontSize: 16,
+                                          color: Color.fromARGB(
+                                              194, 255, 255, 255)),
+                                    ))
                                   ],
                                 ),
                                 Container(
@@ -353,6 +352,24 @@ class _PostPageState extends State<PostPage> {
                           ],
                         );
                       }),
+                  // (commentsViewed.length < widget.comments.length)
+                  //     ? GestureDetector(
+                  //         onTap: () {
+                  //           add10CommentsToList();
+                  //         },
+                  //         child: Container(
+                  //             margin: EdgeInsets.only(
+                  //                 top: 10, left: 10, right: 10, bottom: 10),
+                  //             child: Text("Show more comments",
+                  //                 textAlign: TextAlign.center,
+                  //                 style: TextStyle(
+                  //                   fontFamily: 'Gotham',
+                  //                   fontSize: 18,
+                  //                   color: Color.fromARGB(255, 10, 177, 255),
+                  //                 ))),
+                  //       )
+                  //     : Container(
+                  //         color: Colors.transparent, width: 1, height: 1)
                 )
               : Container(
                   margin: EdgeInsets.only(top: 130),
