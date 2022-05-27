@@ -25,7 +25,7 @@ class NavigationDrawerWidget extends StatelessWidget {
               email: email,
               onClicked: () => Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => UserPage(
-                  // name: 'Sarah Abs',
+                    // name: 'Sarah Abs',
                   // urlImage: urlImage,
                 ),
               )),

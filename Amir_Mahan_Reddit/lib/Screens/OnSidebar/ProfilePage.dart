@@ -25,10 +25,10 @@ class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
+      // appBar: AppBar(
+      //   elevation: 0,
+      //   backgroundColor: Colors.transparent,
+      // ),
       extendBodyBehindAppBar: true,
       backgroundColor: Color(0xFF1F2833),
       body: SingleChildScrollView(
@@ -209,11 +209,26 @@ class _UserPageState extends State<UserPage> {
                   ),
                 ),
           ],
-        ),
-      ),
-    );
+      // body: SizedBox(
+      //   height: MediaQuery.of(context).size.height/2,
+      //   child: Container(
+      //     decoration: BoxDecoration(
+      //       borderRadius: BorderRadius.only(
+      //         bottomLeft: Radius.circular(30),
+      //         bottomRight: Radius.circular(30),
+      //       ),
+      //       image: DecorationImage(
+      //         image: AssetImage('assets/images/AlliSherlock.jpg'),
+      //         fit: BoxFit.cover,
+      //       ),
+      //     ),
+      //   ),
+      // ),
+    )
+    )
   }
-  }
+}
+
 
 
 
