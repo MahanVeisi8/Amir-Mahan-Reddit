@@ -12,6 +12,7 @@ class PostPage extends StatefulWidget {
 
 class _PostPageState extends State<PostPage> {
   List<Comment> commentsViewed = <Comment>[];
+  static int n = 0;
   int indexForComment = 0;
   void add10CommentsToList() {
     for (indexForComment;
@@ -23,8 +24,10 @@ class _PostPageState extends State<PostPage> {
 
   @override
   Widget build(BuildContext context) {
-    add10CommentsToList();
-    print(commentsViewed.length);
+    if (n == 0) {
+      add10CommentsToList();
+      n++;
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -112,7 +115,7 @@ class _PostPageState extends State<PostPage> {
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontFamily: 'Gotham',
-                          fontSize: 12,
+                          fontSize: 14,
                           color: Color.fromARGB(177, 255, 255, 255),
                         ))))
           ]),
@@ -202,119 +205,155 @@ class _PostPageState extends State<PostPage> {
           ]),
 
           (commentsViewed.length > 0)
-              ? Container(
-                  child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
+              ? Expanded(
+                  child: ListView.builder(
+                      physics: AlwaysScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: commentsViewed.length,
+                      itemBuilder: (context, index) {
+                        return Column(
                           children: [
-                            Container(
-                              margin: EdgeInsets.only(
-                                  top: 10, left: 20, right: 10, bottom: 10),
-                              child: CircleAvatar(
-                                radius: 16,
-                                backgroundColor:
-                                    Color.fromARGB(255, 21, 58, 205),
-                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                          top: 10,
+                                          left: 20,
+                                          right: 10,
+                                          bottom: 10),
+                                      child: CircleAvatar(
+                                        radius: 16,
+                                        backgroundColor:
+                                            Color.fromARGB(255, 21, 58, 205),
+                                      ),
+                                    ),
+                                    Container(
+                                        margin: EdgeInsets.only(left: 5),
+                                        child: Text(
+                                          "u/" +
+                                              commentsViewed[index]
+                                                  .getUserName(),
+                                          style: TextStyle(
+                                              fontFamily: 'Gotham',
+                                              fontSize: 16,
+                                              color: Colors.white),
+                                        ))
+                                  ],
+                                ),
+                                Container(
+                                    width: 1,
+                                    height: 1,
+                                    color: Colors.transparent),
+                              ],
                             ),
-                            Container(
-                                margin: EdgeInsets.only(left: 5),
-                                child: Text(
-                                  "u/" + widget.comments[0].getUserName(),
-                                  style: TextStyle(
-                                      fontFamily: 'Gotham',
-                                      fontSize: 16,
-                                      color: Colors.white),
-                                ))
-                          ],
-                        ),
-                        Container(
-                            width: 1, height: 1, color: Colors.transparent),
-                      ],
-                    ),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Flexible(
-                            child: Container(
-                                margin: EdgeInsets.only(
-                                    top: 10, left: 20, right: 10, bottom: 10),
-                                child: Text(widget.comments[0].getText(),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 300,
-                                    style: TextStyle(
+                            Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Flexible(
+                                    child: Container(
+                                        margin: EdgeInsets.only(
+                                            top: 10,
+                                            left: 20,
+                                            right: 10,
+                                            bottom: 10),
+                                        child: Text(
+                                            commentsViewed[index].getText(),
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 300,
+                                            style: TextStyle(
+                                                fontFamily: 'Gotham',
+                                                fontSize: 18,
+                                                color: Colors.white))),
+                                  ),
+                                  Container(
+                                      color: Colors.transparent,
+                                      width: 1,
+                                      height: 1),
+                                ]),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        // setState(() {
+                                        //   posts[index].addLike(widget.user);
+                                        // });
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.only(
+                                            top: 10,
+                                            left: 20,
+                                            right: 10,
+                                            bottom: 10),
+                                        child: Icon(
+                                          Icons.thumb_up_alt_outlined,
+                                          color: Colors.white,
+                                          size: 20,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                        color: Colors.transparent,
+                                        child: Text(
+                                            commentsViewed[index]
+                                                .getNumLikes()
+                                                .toString(),
+                                            style: TextStyle(
+                                              fontFamily: 'Gotham',
+                                              fontSize: 16,
+                                              color: Color.fromARGB(
+                                                  205, 38, 97, 244),
+                                            ))),
+                                    GestureDetector(
+                                      onTap: () {
+                                        // setState(() {
+                                        //   posts[index].addDislike(widget.user);
+                                        // });
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.only(
+                                            top: 10,
+                                            left: 10,
+                                            right: 0,
+                                            bottom: 10),
+                                        child: Icon(
+                                          Icons.thumb_down_alt_outlined,
+                                          color: Colors.white,
+                                          size: 20,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  //passed time:
+                                  margin: EdgeInsets.only(right: 18),
+                                  child: Text("1Y,3M,17D",
+                                      textAlign: TextAlign.right,
+                                      style: TextStyle(
                                         fontFamily: 'Gotham',
-                                        fontSize: 18,
-                                        color: Colors.white))),
-                          ),
-                          Container(
-                              color: Colors.transparent, width: 1, height: 1),
-                        ]),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                // setState(() {
-                                //   posts[index].addLike(widget.user);
-                                // });
-                              },
-                              child: Container(
-                                margin: EdgeInsets.only(
-                                    top: 10, left: 20, right: 10, bottom: 10),
-                                child: Icon(
-                                  Icons.thumb_up_alt_outlined,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
-                              ),
+                                        fontSize: 12,
+                                        color:
+                                            Color.fromARGB(255, 10, 203, 174),
+                                      )),
+                                )
+                              ],
                             ),
                             Container(
-                                color: Colors.transparent,
-                                child: Text(
-                                    widget.comments[0].getNumLikes().toString(),
-                                    style: TextStyle(
-                                      fontFamily: 'Gotham',
-                                      fontSize: 16,
-                                      color: Color.fromARGB(205, 38, 97, 244),
-                                    ))),
-                            GestureDetector(
-                              onTap: () {
-                                // setState(() {
-                                //   posts[index].addDislike(widget.user);
-                                // });
-                              },
-                              child: Container(
-                                margin: EdgeInsets.only(
-                                    top: 10, left: 10, right: 0, bottom: 10),
-                                child: Icon(
-                                  Icons.thumb_down_alt_outlined,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
-                              ),
-                            ),
+                                color: Colors.black45,
+                                height: 1,
+                                width:
+                                    MediaQuery.of(context).size.width * 0.95),
                           ],
-                        ),
-                        Container(
-                          //passed time:
-                          margin: EdgeInsets.only(right: 10),
-                          child: Text("1Y,3M,17D",
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                fontFamily: 'Gotham',
-                                fontSize: 12,
-                                color: Color.fromARGB(255, 10, 203, 174),
-                              )),
-                        )
-                      ],
-                    )
-                  ],
-                ))
+                        );
+                      }),
+                )
               : Container(
                   margin: EdgeInsets.only(top: 130),
                   child: Text("There are no comments",
@@ -323,54 +362,13 @@ class _PostPageState extends State<PostPage> {
                           fontSize: 16,
                           color: Colors.white60)),
                 ),
-          // Expanded(
-          //     child: Align(
-          //         alignment: FractionalOffset.bottomCenter,
-          //         child: ))
-
-          /*  child: Column(
-                        children: [
-                          Container(child: Text("hey")),
-                          Container(
-                            color: Colors.black45,
-                            height: 1,
-                          )
-                        ],
-
-  Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                  color: Color.fromARGB(255, 10, 203, 174), width: 1),
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-            ),
-            margin: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
-            child: TextField(
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: "Add a comment",
-                hintStyle: TextStyle(
-                  fontFamily: 'Gotham',
-                  fontSize: 16,
-                  color: Color.fromARGB(255, 10, 203, 174),
-                ),
-              ),
-              style: TextStyle(
-                fontFamily: 'Gotham',
-                fontSize: 16,
-                color: Color.fromARGB(255, 10, 203, 174),
-              ),
-            ),
-          )
-
-
-
-                      )*/
         ],
       ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.transparent,
         child: Container(
           decoration: BoxDecoration(
+            color: Color.fromARGB(72, 62, 62, 62),
             border:
                 Border.all(color: Color.fromARGB(255, 10, 203, 174), width: 1),
             borderRadius: BorderRadius.all(Radius.circular(22)),

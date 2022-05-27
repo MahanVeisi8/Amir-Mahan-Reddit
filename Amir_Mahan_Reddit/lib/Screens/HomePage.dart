@@ -38,6 +38,14 @@ class _HomePageState extends State<HomePage> {
 
     posts[0].addComment(new Comment(
         "Ridi.", new User("mahan", "email", "password", true), posts[0]));
+    posts[0].addComment(new Comment("Yes And I Loooove it!!! U rock brooo ♥♥♥",
+        new User("matin", "email", "password", true), posts[0]));
+
+    posts[0].addComment(new Comment("Amazing!! ♥♥♥",
+        new User("Setareh", "email", "password", false), posts[0]));
+
+    posts[0].addComment(new Comment(
+        "Ridi.", new User("mahan", "email", "password", true), posts[0]));
 
     posts.add(new Post(new User("Setareh", "email", "password", false), com,
         "Woooowww this is aaammaaaazing!", "Awwwlieeee"));
