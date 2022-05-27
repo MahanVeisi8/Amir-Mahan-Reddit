@@ -375,11 +375,11 @@ class _HomePageState extends State<HomePage> {
                 color: Color.fromARGB(236, 27, 241, 234),
                 onPressed: () {},
               ),
-              IconButton(
-                icon: Icon(Icons.search),
-                color: Colors.white60,
-                onPressed: () {},
-              ),
+              // IconButton(
+              //   icon: Icon(Icons.search),
+              //   color: Colors.white60,
+              //   onPressed: () {},
+              // ),
               IconButton(
                 icon: Icon(Icons.add),
                 color: Colors.white60,
@@ -400,21 +400,21 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
               ),
-              IconButton(
-                icon: Icon(Icons.settings),
-                color: Colors.white60,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                      pageBuilder: (c, a1, a2) => Setting(),
-                      transitionsBuilder: (c, anim, a2, child) =>
-                          FadeTransition(opacity: anim, child: child),
-                      transitionDuration: Duration(milliseconds: 200),
-                    ),
-                  );
-                },
-              ),
+              // IconButton(
+              //   icon: Icon(Icons.settings),
+              //   color: Colors.white60,
+              //   onPressed: () {
+              //     Navigator.push(
+              //       context,
+              //       PageRouteBuilder(
+              //         pageBuilder: (c, a1, a2) => Setting(),
+              //         transitionsBuilder: (c, anim, a2, child) =>
+              //             FadeTransition(opacity: anim, child: child),
+              //         transitionDuration: Duration(milliseconds: 200),
+              //       ),
+              //     );
+              //   },
+              // ),
             ],
           ),
           ),
