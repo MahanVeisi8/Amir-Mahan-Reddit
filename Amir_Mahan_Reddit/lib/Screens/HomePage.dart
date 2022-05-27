@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
         endDrawer: NavigationDrawerWidget(),
         appBar: AppBar(
           title: Text(
-            "Reddit",
+            "Blueit",
             style: TextStyle(
                 color: Colors.white,
                 fontFamily: 'Gotham',
