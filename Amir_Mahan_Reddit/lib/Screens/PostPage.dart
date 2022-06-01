@@ -31,7 +31,7 @@ class _PostPageState extends State<PostPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Reddit",
+          "Blueit",
           style: TextStyle(
               color: Colors.white,
               fontFamily: 'Gotham',

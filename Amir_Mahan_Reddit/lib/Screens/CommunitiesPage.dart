@@ -2,6 +2,7 @@ import 'package:Amir_Mahan_Reddit/Screens/AddPost.dart';
 import 'package:Amir_Mahan_Reddit/Screens/CommunitiesPage.dart';
 import 'package:Amir_Mahan_Reddit/Screens/OnSidebar/ProfilePage.dart';
 import 'package:Amir_Mahan_Reddit/Screens/PostPage.dart';
+import 'package:Amir_Mahan_Reddit/Screens/CommunitiesDetailsPage.dart';
 import 'package:flutter/material.dart';
 import 'package:Amir_Mahan_Reddit/Screens/SettingPage.dart';
 import 'package:Amir_Mahan_Reddit/Widgets/sideBarDrawer.dart';
@@ -71,7 +72,17 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(createRoute(CommunityDetailExample(), 0));
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (c, a1, a2) => CommunitiesDetailsPage(
+                            community: communities[index],
+                          ),
+                          transitionsBuilder: (c, anim, a2, child) =>
+                              FadeTransition(opacity: anim, child: child),
+                          transitionDuration: Duration(milliseconds: 200),
+                        ),
+                      );
                     },
                     child: Container(
                         color: Colors.transparent,

@@ -9,6 +9,7 @@ class Community {
   int numMembers;
   String name;
   String description;
+  String ProfileImage;
 
   Community(User admin, String name, String description) {
     this.admin = admin;
@@ -19,6 +20,10 @@ class Community {
     this.name = name;
     this.description = description;
   }
+  void setProfileImage(String image) {
+    this.ProfileImage = image;
+  }
+
   User getAdmin() {
     return admin;
   }
