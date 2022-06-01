@@ -1,11 +1,18 @@
-// import 'dart:html';
-
-import 'package:Amir_Mahan_Reddit/BasicClasses/Community.dart';
-import 'package:Amir_Mahan_Reddit/Screens/HomePage.dart';
+import 'package:Amir_Mahan_Reddit/Screens/AddPost.dart';
+import 'package:Amir_Mahan_Reddit/Screens/CommunitiesPage.dart';
+import 'package:Amir_Mahan_Reddit/Screens/OnSidebar/ProfilePage.dart';
+import 'package:Amir_Mahan_Reddit/Screens/PostPage.dart';
 import 'package:flutter/material.dart';
-
-import '../BasicClasses/Users.dart';
-
+import 'package:Amir_Mahan_Reddit/Screens/SettingPage.dart';
+import 'package:Amir_Mahan_Reddit/Widgets/sideBarDrawer.dart';
+import 'package:Amir_Mahan_Reddit/Widgets/SideBarButtonWidget.dart';
+import 'package:Amir_Mahan_Reddit/BasicClasses/Post.dart';
+import 'package:Amir_Mahan_Reddit/BasicClasses/Users.dart';
+import 'package:Amir_Mahan_Reddit/Widgets/AnimationRoute.dart';
+import 'package:Amir_Mahan_Reddit/Screens/HomePage.dart';
+import '../BasicClasses/Comment.dart';
+import '../BasicClasses/Community.dart';
+import 'package:Amir_Mahan_Reddit/Screens/CommunityDetailExample.dart';
 class CommunitiesPage extends StatefulWidget {
   const CommunitiesPage({Key key}) : super(key: key);
 
@@ -63,7 +70,9 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
               itemCount: communities.length,
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(createRoute(CommunityDetailExample(), 0));
+                    },
                     child: Container(
                         color: Colors.transparent,
                         child: Material(
@@ -83,7 +92,9 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
                                               top: 15,
                                               bottom: 10),
                                           child: CircleAvatar(
-                                            backgroundColor: Colors.blueAccent,
+                                            backgroundColor: Colors.transparent,
+                                            backgroundImage: AssetImage(
+                                                "assets/images/Doofus_Rick.png"),
                                           ),
                                         ),
                                         Container(
@@ -172,21 +183,15 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
               IconButton(
                 icon: Icon(Icons.add),
                 color: Colors.white60,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(createRoute(AddPost(), 0));
+                },
               ),
               IconButton(
                 icon: Icon(Icons.list_rounded),
                 color: Color.fromARGB(236, 27, 241, 234),
                 onPressed: () {},
               ),
-              // IconButton(
-              //   icon: Icon(Icons.settings),
-              //   color: Colors.white60,
-              //   onPressed: () {
-              //     // Navigator.push(context,
-              //     //     MaterialPageRoute(builder: (context) => Setting()));
-              //   },
-              // ),
             ],
           )),
         ));

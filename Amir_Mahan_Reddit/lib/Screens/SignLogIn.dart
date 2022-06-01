@@ -19,6 +19,21 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
   bool isMale = true;
   bool isRememberMe = false;
   final regexForEmail = RegExp(r'^[a-zA-Z0-9]+@gmail.com$');
+  final regexForLowerCase = RegExp(r'[a-z]+');
+  final regexForUpperCase = RegExp(r'[A-Z]+');
+  final regexForNumber = RegExp(r'[0-9]+');
+
+  // String userName = userNameController.text;
+  // String email = emailController.text;
+  // String password = passwordController.text;
+  // RegExp regexForEmail = RegExp(r'^[a-zA-Z0-9]+@gmail.com$');
+  // RegExp regexForLowerCase = RegExp(r'[a-z]+');
+  // RegExp regexForUpperCase = RegExp(r'[A-Z]+');
+  // RegExp regexForNumber = RegExp(r'[0-9]+');
+  // bool validPassword = password.length >= 8 &&
+  //     regexForLowerCase.hasMatch(password) &&
+  //     regexForUpperCase.hasMatch(password) &&
+  //     regexForNumber.hasMatch(password);
   User user;
   TextEditingController userNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -38,16 +53,10 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
             ),
           ),
           Positioned(
-            top: 0,
+            top: 30,
             right: 0,
             left: 0,
             child: Container(
-              // decoration: BoxDecoration(
-              //     image: DecorationImage(
-              //         image: AssetImage("assets/images/signInBackground2.jpg"),
-              //         fit: BoxFit.cover,
-              //       )
-              // ),
               child: Container(
                 padding: EdgeInsets.only(top: 30, left: 30),
                 // color: Color(0xFF3b5999).withOpacity(.85),
@@ -56,19 +65,19 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                   children: [
                     RichText(
                       text: TextSpan(
-                          text: "Welcome to",
+                          text: "Welcome to ",
                           style: TextStyle(
                             fontSize: 25,
                             letterSpacing: 2,
-                            color: Colors.yellow[700],
+                            color: Colors.white70,
                           ),
                           children: [
                             TextSpan(
-                              text: isSignupScreen ? " Rizona," : " Back,",
+                              text: "BlueIt",
                               style: TextStyle(
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.yellow[700],
+                                color: Color(0xFF66FCF1),
                               ),
                             )
                           ]),
@@ -96,7 +105,7 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
           AnimatedPositioned(
             duration: Duration(milliseconds: 400),
             curve: Curves.bounceInOut,
-            top: isSignupScreen ? 90 : 120,
+            top: isSignupScreen ? 120 : 140,
             child: AnimatedContainer(
               duration: Duration(milliseconds: 400),
               curve: Curves.bounceInOut,
@@ -105,7 +114,7 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
               width: MediaQuery.of(context).size.width - 40,
               margin: EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Color(0xFF1F2833).withOpacity(.85),
                   borderRadius: BorderRadius.circular(15),
                   boxShadow: [
                     BoxShadow(
@@ -133,15 +142,15 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     color: !isSignupScreen
-                                        ? Palette.activeColor
-                                        : Palette.textColor1),
+                                        ? Color(0xFF66FCF1)
+                                        : Colors.white),
                               ),
                               if (!isSignupScreen)
                                 Container(
                                   margin: EdgeInsets.only(top: 3),
                                   height: 2,
                                   width: 55,
-                                  color: Colors.orange,
+                                  color: Color(0xFF45A29E),
                                 )
                             ],
                           ),
@@ -159,16 +168,16 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                                 style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
-                                    color: isSignupScreen
-                                        ? Palette.activeColor
-                                        : Palette.textColor1),
+                                    color: !isSignupScreen
+                                        ? Colors.white
+                                        : Color(0xFF66FCF1)),
                               ),
                               if (isSignupScreen)
                                 Container(
                                   margin: EdgeInsets.only(top: 3),
                                   height: 2,
                                   width: 55,
-                                  color: Colors.orange,
+                                  color: Color(0xFF45A29E),
                                 )
                             ],
                           ),
@@ -198,9 +207,9 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       buildTextButton(MaterialCommunityIcons.facebook,
-                          "Facebook", Palette.facebookColor),
+                          "Facebook", Color(0xFF3b5999)),
                       buildTextButton(MaterialCommunityIcons.google_plus,
-                          "Google", Palette.googleColor),
+                          "Google", Color(0xFFDB4437)),
                     ],
                   ),
                 )
@@ -217,17 +226,106 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
       margin: EdgeInsets.only(top: 20),
       child: Column(
         children: [
-          buildTextField(Icons.mail_outline, "info@demouri.com", false, true),
-          buildTextField(
-              MaterialCommunityIcons.lock_outline, "**********", true, false),
+          Container(
+            child: ListTile(
+              leading: Icon(
+                MaterialCommunityIcons.account_outline,
+                color: Color(0xFF66FCF1),
+              ),
+              minLeadingWidth: 0,
+              title: TextFormField(
+                onTap: () {
+                  setState(() {
+                    // isSignupScreen = true;
+                  });
+                },
+                cursorColor: Color(0xFF66FCF1),
+                decoration: InputDecoration(
+                  hintText: "User Name",
+                  hintStyle: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.white,
+                ),
+                controller: userNameController,
+                keyboardType: TextInputType.text,
+                maxLines: 1,
+              ),
+              trailing: Icon(
+                userNameController.text.isEmpty
+                    ? Icons.close
+                    : Icons.check,
+                color: Color(0xFF66FCF1),
+              ),
+            ),
+          ),
+          Container(
+            child: ListTile(
+              leading: Icon(
+                MaterialCommunityIcons.lock_outline,
+                color: Color(0xFF66FCF1),
+              ),
+              minLeadingWidth: 0,
+              title: TextFormField(
+                obscureText: true,
+                cursorColor: Color(0xFF66FCF1),
+                decoration: InputDecoration(
+                  hintText: "Password",
+                  hintStyle: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.white,
+                ),
+                controller: passwordController,
+                keyboardType: TextInputType.text,
+                maxLines: 1,
+              ),
+              trailing: Icon(
+                passwordController.text.isEmpty
+                    ? Icons.close
+                    : !regexForLowerCase.hasMatch(passwordController.text)
+                    ? Icons.close
+                    : !regexForUpperCase.hasMatch(passwordController.text)
+                    ? Icons.close
+                    : !regexForNumber.hasMatch(passwordController.text)
+                    ? Icons.close
+                    : passwordController.text.length < 8
+                    ? Icons.close
+                    : Icons.check,
+                color: Color(0xFF66FCF1),
+              ),
+            ),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
                   Checkbox(
+                    // focusColor: Color(0xFF66FCF1),
                     value: isRememberMe,
-                    activeColor: Palette.textColor2,
+                    hoverColor: Colors.white,
+                    activeColor: Colors.transparent,
+                    checkColor: Color(0xFF66FCF1),
+                    shape: CircleBorder(),
                     onChanged: (value) {
                       setState(() {
                         isRememberMe = !isRememberMe;
@@ -235,13 +333,13 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                     },
                   ),
                   Text("Remember me",
-                      style: TextStyle(fontSize: 12, color: Palette.textColor1))
+                      style: TextStyle(fontSize: 12, color: Colors.white))
                 ],
               ),
               TextButton(
                 onPressed: () {},
                 child: Text("Forgot Password?",
-                    style: TextStyle(fontSize: 12, color: Palette.textColor1)),
+                    style: TextStyle(fontSize: 12, color: Color(0xFF66FCF1))),
               )
             ],
           )
@@ -259,9 +357,16 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
             child: ListTile(
               leading: Icon(
                 MaterialCommunityIcons.account_outline,
+                color: Color(0xFF66FCF1),
               ),
               minLeadingWidth: 0,
               title: TextFormField(
+                onTap: () {
+                  setState(() {
+                    // isSignupScreen = true;
+                  });
+                },
+                cursorColor: Color(0xFF66FCF1),
                 decoration: InputDecoration(
                   hintText: "User Name",
                   hintStyle: TextStyle(
@@ -276,15 +381,17 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                 ),
                 style: TextStyle(
                   fontSize: 15,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
                 controller: userNameController,
                 keyboardType: TextInputType.text,
                 maxLines: 1,
               ),
               trailing: Icon(
-                Icons.check,
-                color: Colors.green,
+                userNameController.text.isEmpty
+                    ? Icons.close
+                    : Icons.check,
+                color: Color(0xFF66FCF1),
               ),
             ),
           ),
@@ -292,9 +399,15 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
             child: ListTile(
               leading: Icon(
                 MaterialCommunityIcons.email_outline,
+                color: Color(0xFF66FCF1),
               ),
               minLeadingWidth: 0,
               title: TextFormField(
+                onTap: () {
+                  setState(() {
+                  });
+                },
+                cursorColor: Color(0xFF66FCF1),
                 decoration: InputDecoration(
                   hintText: "Email",
                   hintStyle: TextStyle(
@@ -302,6 +415,9 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
                   ),
+                  // hoverColor: Color(0xFF66FCF1),
+                  // focusColor: Color(0xFF66FCF1),
+
                   contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 0),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -309,15 +425,18 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                 ),
                 style: TextStyle(
                   fontSize: 15,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
                 controller: emailController,
                 keyboardType: TextInputType.text,
                 maxLines: 1,
               ),
               trailing: Icon(
-                Icons.check,
-                color: Colors.green,
+                regexForEmail.hasMatch(emailController.text)
+                    ? Icons.check
+                    : Icons.close,
+                // Icons.check,
+                color: Color(0xFF66FCF1),
               ),
             ),
           ),
@@ -325,9 +444,12 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
             child: ListTile(
               leading: Icon(
                 MaterialCommunityIcons.lock_outline,
+                color: Color(0xFF66FCF1),
               ),
               minLeadingWidth: 0,
               title: TextFormField(
+                obscureText: true,
+                cursorColor: Color(0xFF66FCF1),
                 decoration: InputDecoration(
                   hintText: "Password",
                   hintStyle: TextStyle(
@@ -342,50 +464,28 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                 ),
                 style: TextStyle(
                   fontSize: 15,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
                 controller: passwordController,
                 keyboardType: TextInputType.text,
                 maxLines: 1,
               ),
               trailing: Icon(
-                Icons.check,
-                color: Colors.green,
+                passwordController.text.isEmpty
+                    ? Icons.close
+                    : !regexForLowerCase.hasMatch(passwordController.text)
+                        ? Icons.close
+                        : !regexForUpperCase.hasMatch(passwordController.text)
+                            ? Icons.close
+                            : !regexForNumber.hasMatch(passwordController.text)
+                                ? Icons.close
+                                : passwordController.text.length < 8
+                                    ? Icons.close
+                                    : Icons.check,
+                color: Color(0xFF66FCF1),
               ),
             ),
           ),
-          // child: TextFormField(
-          //   decoration: InputDecoration(
-          //     hintText: "User Name",
-          //     hintStyle: TextStyle(
-          //       color: Colors.grey,
-          //       fontSize: 15,
-          //       fontWeight: FontWeight.w600,
-          //
-          //     ),
-          //     contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-          //     border: OutlineInputBorder(
-          //       borderRadius: BorderRadius.circular(30),
-          //     ),
-          //
-          //   ),
-          //   style: TextStyle(
-          //     fontSize: 15,
-          //     color: Colors.black,
-          //   ),
-          //   controller: userNameController,
-          //   keyboardType: TextInputType.text,
-          //   maxLines: 1,
-          //
-          // ),
-
-          // buildTextField(MaterialCommunityIcons.account_outline, "User Name",
-          //     false, false),
-          // buildTextField(
-          //     MaterialCommunityIcons.email_outline, "email", false, true
-          // ),
-          // buildTextField(
-          //     MaterialCommunityIcons.lock_outline, "password", true, false),
           Padding(
             padding: const EdgeInsets.only(top: 10, left: 10),
             child: Row(
@@ -404,18 +504,16 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                         height: 30,
                         margin: EdgeInsets.only(right: 8),
                         decoration: BoxDecoration(
-                            color: isMale
-                                ? Palette.textColor2
-                                : Colors.transparent,
+                            color: Colors.transparent,
                             border: Border.all(
                                 width: 1,
                                 color: isMale
-                                    ? Colors.transparent
-                                    : Palette.textColor1),
+                                    ? Color(0xFF66FCF1)
+                                    : Colors.transparent),
                             borderRadius: BorderRadius.circular(15)),
                         child: Icon(
                           MaterialCommunityIcons.account_outline,
-                          color: isMale ? Colors.white : Palette.iconColor,
+                          color: isMale ? Color(0xFF66FCF1) : Palette.iconColor,
                         ),
                       ),
                       Text(
@@ -428,23 +526,6 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                 SizedBox(
                   width: 30,
                 ),
-                // Container(
-                //   // width: 200,
-                //   margin: EdgeInsets.only(top: 20),
-                //   child: RichText(
-                //     textAlign: TextAlign.center,
-                //     text: TextSpan(
-                //         text: "By pressing 'Submit' you agree \nto our ",
-                //         style: TextStyle(color: Palette.textColor2),
-                //         children: [
-                //           TextSpan(
-                //             text: "term & conditions",
-                //             style: TextStyle(color: Colors.orange),
-                //           ),
-                //         ]
-                //     ),
-                //   ),
-                // ),
                 GestureDetector(
                   onTap: () {
                     setState(() {
@@ -458,18 +539,16 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                         height: 30,
                         margin: EdgeInsets.only(right: 8),
                         decoration: BoxDecoration(
-                            color: isMale
-                                ? Colors.transparent
-                                : Palette.textColor2,
+                            color: Colors.transparent,
                             border: Border.all(
                                 width: 1,
                                 color: isMale
-                                    ? Palette.textColor1
-                                    : Colors.transparent),
+                                    ? Colors.transparent
+                                    : Color(0xFF66FCF1)),
                             borderRadius: BorderRadius.circular(15)),
                         child: Icon(
                           MaterialCommunityIcons.account_outline,
-                          color: isMale ? Palette.iconColor : Colors.white,
+                          color: isMale ? Palette.iconColor : Color(0xFF66FCF1),
                         ),
                       ),
                       Text(
@@ -492,11 +571,11 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                   style: TextStyle(color: Palette.textColor2),
                   children: [
                     TextSpan(
-                      //recognizer: ,
                       text: "term & conditions",
-                      style: TextStyle(color: Colors.orange),
+                      style: TextStyle(color: Color(0xFF66FCF1)),
                     ),
-                  ]),
+                  ]
+              ),
             ),
           ),
         ],
@@ -535,7 +614,7 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
     return AnimatedPositioned(
       duration: Duration(milliseconds: 400),
       curve: Curves.bounceInOut,
-      top: isSignupScreen ? 420 : 330,
+      top: isSignupScreen ? 450 : 350,
       right: 0,
       left: 0,
       child: Center(
@@ -628,7 +707,7 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
             width: 90,
             padding: EdgeInsets.all(15),
             decoration: BoxDecoration(
-                color: Colors.white,
+                color: Color(0xFF1F2833).withOpacity(.85),
                 borderRadius: BorderRadius.circular(50),
                 boxShadow: [
                   if (showShadow)
@@ -642,10 +721,15 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                 ? Container(
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
-                            // colors: [Colors.orange[200], Colors.red[400]],
-                            colors: [Colors.orange, Colors.red],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight),
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Color(0xFFdce3e2),
+                            Color(0xFF0ffceb),
+                            Color(0xFF30e3d6),
+                            Color(0xFF1F2833),
+                          ],
+                        ),
                         borderRadius: BorderRadius.circular(30),
                         boxShadow: [
                           BoxShadow(

@@ -379,15 +379,6 @@ class _HomePageState extends State<HomePage> {
                 icon: Icon(Icons.add),
                 color: Colors.white60,
                 onPressed: () {
-                  // Navigator.push(
-                  //     context,
-                  //     PageRouteBuilder(
-                  //         pageBuilder: (context, animation1, animation2) {
-                  //       return AddPost();
-                  //     },
-                  //         transitionDuration: Duration(milliseconds: 500)
-                  //     )
-                  // );
                   Navigator.of(context).push(createRoute(AddPost(), 0));
                 },
               ),
