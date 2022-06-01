@@ -1,3 +1,4 @@
+import 'package:Amir_Mahan_Reddit/Screens/AddPost.dart';
 import 'package:Amir_Mahan_Reddit/Screens/CommunitiesPage.dart';
 import 'package:Amir_Mahan_Reddit/Screens/OnSidebar/ProfilePage.dart';
 import 'package:Amir_Mahan_Reddit/Screens/PostPage.dart';
@@ -7,6 +8,7 @@ import 'package:Amir_Mahan_Reddit/Widgets/sideBarDrawer.dart';
 import 'package:Amir_Mahan_Reddit/Widgets/SideBarButtonWidget.dart';
 import 'package:Amir_Mahan_Reddit/BasicClasses/Post.dart';
 import 'package:Amir_Mahan_Reddit/BasicClasses/Users.dart';
+import 'package:Amir_Mahan_Reddit/Widgets/AnimationRoute.dart';
 
 import '../BasicClasses/Comment.dart';
 import '../BasicClasses/Community.dart';
@@ -189,10 +191,8 @@ class _HomePageState extends State<HomePage> {
                                 margin: EdgeInsets.only(
                                     top: 10, left: 10, right: 10, bottom: 10),
                                 child: CircleAvatar(
-                                  backgroundColor:
-                                      Color.fromARGB(255, 21, 58, 205),
-                                  // backgroundImage:
-                                  // AssetImage("assets/images/profile.jpg"),
+                                  backgroundImage: AssetImage(
+                                      'assets/images/Avatar2.png'),
                                 ),
                               ),
                               Column(children: [
@@ -376,14 +376,20 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () {},
               ),
               IconButton(
-                icon: Icon(Icons.search),
-                color: Colors.white60,
-                onPressed: () {},
-              ),
-              IconButton(
                 icon: Icon(Icons.add),
                 color: Colors.white60,
-                onPressed: () {},
+                onPressed: () {
+                  // Navigator.push(
+                  //     context,
+                  //     PageRouteBuilder(
+                  //         pageBuilder: (context, animation1, animation2) {
+                  //       return AddPost();
+                  //     },
+                  //         transitionDuration: Duration(milliseconds: 500)
+                  //     )
+                  // );
+                  Navigator.of(context).push(createRoute(AddPost(), 0));
+                },
               ),
               IconButton(
                 icon: Icon(Icons.list_rounded),
@@ -400,21 +406,21 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
               ),
-              IconButton(
-                icon: Icon(Icons.settings),
-                color: Colors.white60,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                      pageBuilder: (c, a1, a2) => Setting(),
-                      transitionsBuilder: (c, anim, a2, child) =>
-                          FadeTransition(opacity: anim, child: child),
-                      transitionDuration: Duration(milliseconds: 200),
-                    ),
-                  );
-                },
-              ),
+              // IconButton(
+              //   icon: Icon(Icons.settings),
+              //   color: Colors.white60,
+              //   onPressed: () {
+              //     Navigator.push(
+              //       context,
+              //       PageRouteBuilder(
+              //         pageBuilder: (c, a1, a2) => Setting(),
+              //         transitionsBuilder: (c, anim, a2, child) =>
+              //             FadeTransition(opacity: anim, child: child),
+              //         transitionDuration: Duration(milliseconds: 200),
+              //       ),
+              //     );
+              //   },
+              // ),
             ],
           ),
           ),

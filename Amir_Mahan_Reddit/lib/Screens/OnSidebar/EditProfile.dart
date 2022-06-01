@@ -13,7 +13,7 @@ import 'package:Amir_Mahan_Reddit/Widgets/sideBarDrawer.dart';
 import 'package:Amir_Mahan_Reddit/Widgets/SideBarButtonWidget.dart';
 import 'package:Amir_Mahan_Reddit/Screens/WelcomePage.dart';
 import 'package:Amir_Mahan_Reddit/Screens/SignLogIn.dart';
-
+import 'package:Amir_Mahan_Reddit/Screens/loadPage.dart';
 class EditProfile extends StatefulWidget {
   const EditProfile({Key key}) : super(key: key);
 
@@ -56,7 +56,7 @@ class _EditProfileState extends State<EditProfile> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => UserPage(),
+                      builder: (context) => LoadPage(),
                     ),
                   );
                 },

@@ -48,7 +48,7 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: Color.fromARGB(248, 44, 44, 44),
+          backgroundColor: Color(0xFF1F2833),
           title: Text(
             "Communities",
             style: TextStyle(
@@ -142,7 +142,7 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
                             ))));
               }),
         ),
-        backgroundColor: Colors.black87,
+        backgroundColor: Color(0xFF1F2833),
         bottomNavigationBar: BottomAppBar(
           color: Colors.transparent,
           child: Container(
@@ -164,11 +164,11 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
                   );
                 },
               ),
-              IconButton(
-                icon: Icon(Icons.search),
-                color: Colors.white60,
-                onPressed: () {},
-              ),
+              // IconButton(
+              //   icon: Icon(Icons.search),
+              //   color: Colors.white60,
+              //   onPressed: () {},
+              // ),
               IconButton(
                 icon: Icon(Icons.add),
                 color: Colors.white60,
@@ -179,14 +179,14 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
                 color: Color.fromARGB(236, 27, 241, 234),
                 onPressed: () {},
               ),
-              IconButton(
-                icon: Icon(Icons.settings),
-                color: Colors.white60,
-                onPressed: () {
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (context) => Setting()));
-                },
-              ),
+              // IconButton(
+              //   icon: Icon(Icons.settings),
+              //   color: Colors.white60,
+              //   onPressed: () {
+              //     // Navigator.push(context,
+              //     //     MaterialPageRoute(builder: (context) => Setting()));
+              //   },
+              // ),
             ],
           )),
         ));

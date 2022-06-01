@@ -40,6 +40,7 @@ dependencies:
   fluttertoast: ^8.0.9
   stream_feed_flutter_core: ^0.7.0+1
   provider: ^6.0.2
+  animations: ^1.1.2
   flutter_bloc: ^8.0.1
 #  google_fonts: ^2.3.1
 #  image_picker: ^0.8.4+9

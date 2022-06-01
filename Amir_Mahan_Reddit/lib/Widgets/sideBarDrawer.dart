@@ -3,7 +3,7 @@ import 'package:Amir_Mahan_Reddit/Screens/OnSidebar/AboutUs.dart';
 import 'package:Amir_Mahan_Reddit/Screens/OnSidebar/ProfilePage.dart';
 import 'package:Amir_Mahan_Reddit/Screens/OnSidebar/SavedPosts.dart';
 import 'package:Amir_Mahan_Reddit/Screens/OnSidebar/ThemeChoosing.dart';
-
+import 'package:Amir_Mahan_Reddit/Screens/SettingPage.dart';
 class NavigationDrawerWidget extends StatelessWidget {
   final padding = EdgeInsets.symmetric(horizontal: 20);
   @override
@@ -179,7 +179,12 @@ class NavigationDrawerWidget extends StatelessWidget {
           builder: (context) => FavouritesPage(),
         ));
         break;
-
+        //case2
+      case 3:
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => Setting(),
+        ));
+        break;
     }
   }
 }
