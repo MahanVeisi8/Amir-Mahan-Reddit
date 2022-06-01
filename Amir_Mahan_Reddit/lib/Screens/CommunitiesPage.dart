@@ -2,6 +2,7 @@
 
 import 'package:Amir_Mahan_Reddit/BasicClasses/Community.dart';
 import 'package:Amir_Mahan_Reddit/Screens/HomePage.dart';
+import 'package:Amir_Mahan_Reddit/Screens/CommunitiesDetailsPage.dart';
 import 'package:flutter/material.dart';
 
 import '../BasicClasses/Users.dart';
@@ -63,7 +64,19 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
               itemCount: communities.length,
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (c, a1, a2) => CommunitiesDetailsPage(
+                            community: communities[index],
+                          ),
+                          transitionsBuilder: (c, anim, a2, child) =>
+                              FadeTransition(opacity: anim, child: child),
+                          transitionDuration: Duration(milliseconds: 200),
+                        ),
+                      );
+                    },
                     child: Container(
                         color: Colors.transparent,
                         child: Material(
