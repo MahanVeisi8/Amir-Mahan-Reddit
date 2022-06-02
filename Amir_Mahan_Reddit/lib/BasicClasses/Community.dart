@@ -24,6 +24,16 @@ class Community {
     this.ProfileImage = image;
   }
 
+  void addMember(User member) {
+    this.members.add(member);
+    this.numMembers++;
+  }
+
+  void addPost(Post post) {
+    this.posts.add(post);
+    this.numPosts++;
+  }
+
   User getAdmin() {
     return admin;
   }
