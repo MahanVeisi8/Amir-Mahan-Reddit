@@ -1,5 +1,7 @@
 import 'package:Amir_Mahan_Reddit/Screens/HomePage.dart';
 import 'package:Amir_Mahan_Reddit/Screens/ProfilePage.dart';
+import 'package:Amir_Mahan_Reddit/Screens/ShowCommunityPosts.dart';
+import 'package:Amir_Mahan_Reddit/Screens/ShowMembers.dart';
 import 'package:flutter/material.dart';
 import 'package:Amir_Mahan_Reddit/BasicClasses/Community.dart';
 
@@ -51,7 +53,7 @@ class _CommunitiesDetailsPageState extends State<CommunitiesDetailsPage> {
                   ))),
               GestureDetector(
                 child: Container(
-                  margin: EdgeInsets.only(top: 18, left: 20),
+                  margin: EdgeInsets.only(top: 35, left: 20),
                   child: Icon(
                     Icons.arrow_back_ios,
                     color: Colors.white70,
@@ -127,7 +129,28 @@ class _CommunitiesDetailsPageState extends State<CommunitiesDetailsPage> {
                       fontSize: 16,
                       color: Colors.white70),
                 ),
-              )
+              ),
+              Container(
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    border: Border.all(
+                        color: Color.fromARGB(255, 10, 203, 174), width: 1),
+                    borderRadius: BorderRadius.all(Radius.circular(22)),
+                  ),
+                  margin: EdgeInsets.only(
+                      left: MediaQuery.of(context).size.width * 0.8, top: 35),
+                  child: GestureDetector(
+                    child: Container(
+                      child: Text("Follow",
+                          style: TextStyle(
+                              fontFamily: 'Gotham',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 18,
+                              color: Colors.white70)),
+                      margin: EdgeInsets.only(
+                          left: 10, right: 10, top: 10, bottom: 10),
+                    ),
+                  ))
             ]),
             Flexible(
               child: Container(
@@ -197,6 +220,11 @@ class _CommunitiesDetailsPageState extends State<CommunitiesDetailsPage> {
                     ))
               ],
             ),
+            Container(
+                height: 1,
+                width: 1,
+                color: Colors.transparent,
+                margin: EdgeInsets.only(top: 10)),
             Expanded(
                 child: ListView.builder(
                     shrinkWrap: true,
@@ -218,7 +246,7 @@ class _CommunitiesDetailsPageState extends State<CommunitiesDetailsPage> {
                         );
                       }
 
-                      if (index < 5)
+                      if (showPosts && index < 5)
                         return GestureDetector(
                           onTap: () {},
                           child: Material(
@@ -421,8 +449,7 @@ class _CommunitiesDetailsPageState extends State<CommunitiesDetailsPage> {
                                               style: TextStyle(
                                                 fontFamily: 'Gotham',
                                                 fontSize: 12,
-                                                color: Color.fromARGB(
-                                                    255, 10, 203, 174),
+                                                color: Colors.white70,
                                               )),
                                         ),
                                         Container(
@@ -437,73 +464,168 @@ class _CommunitiesDetailsPageState extends State<CommunitiesDetailsPage> {
                                 ),
                               ])),
                         );
-                      return Column(
-                        children: [
-                          GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              margin: EdgeInsets.only(
-                                top: 15,
-                                left: 10,
-                              ),
-                              height: 38,
-                              width: MediaQuery.of(context).size.width,
-                              child: Text(
-                                "+ Show more",
-                                style: TextStyle(
-                                    fontFamily: 'Gotham',
-                                    fontSize: 18,
-                                    color: Color.fromARGB(255, 26, 198, 255)),
+                      if (showPosts && index == 5)
+                        return Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  PageRouteBuilder(
+                                    pageBuilder: (c, a1, a2) =>
+                                        ShowCommunityPosts(
+                                      posts: widget.community.getPosts(),
+                                    ),
+                                    transitionsBuilder: (c, anim, a2, child) =>
+                                        FadeTransition(
+                                            opacity: anim, child: child),
+                                    transitionDuration:
+                                        Duration(milliseconds: 200),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                  top: 15,
+                                  left: 10,
+                                ),
+                                height: 38,
+                                width: MediaQuery.of(context).size.width,
+                                child: Text(
+                                  "+ Show more",
+                                  style: TextStyle(
+                                      fontFamily: 'Gotham',
+                                      fontSize: 18,
+                                      color: Color.fromARGB(255, 26, 198, 255)),
+                                ),
                               ),
                             ),
+                            Container(
+                              color: Colors.black45,
+                              height: 1,
+                            ),
+                          ],
+                        );
+                      if (!showPosts && index < 5)
+                        return Column(children: [
+                          Row(
+                            children: [
+                              Container(
+                                child: CircleAvatar(
+                                  radius: 20,
+                                  backgroundImage:
+                                      AssetImage('assets/images/Avatar2.png'),
+                                ),
+                                margin: EdgeInsets.only(
+                                  top: 10,
+                                  left: 10,
+                                  right: 10,
+                                  bottom: 10,
+                                ),
+                              ),
+                              Container(
+                                  margin: EdgeInsets.only(left: 10),
+                                  child: Text(
+                                    "u/" +
+                                        widget.community
+                                            .getMembers()[index]
+                                            .getUsername(),
+                                    style: TextStyle(
+                                      fontFamily: 'Gotham',
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                    ),
+                                  )),
+                            ],
                           ),
                           Container(
                             color: Colors.black45,
                             height: 1,
-                          ),
-                        ],
-                      );
-                    }))
+                            width: MediaQuery.of(context).size.width * 0.9,
+                          )
+                        ]);
+                      if (!showPosts && index == 5)
+                        return Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  PageRouteBuilder(
+                                    pageBuilder: (c, a1, a2) => ShowMembers(
+                                      members: widget.community.getMembers(),
+                                    ),
+                                    transitionsBuilder: (c, anim, a2, child) =>
+                                        FadeTransition(
+                                            opacity: anim, child: child),
+                                    transitionDuration:
+                                        Duration(milliseconds: 200),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                  top: 15,
+                                  left: 10,
+                                ),
+                                height: 38,
+                                width: MediaQuery.of(context).size.width,
+                                child: Text(
+                                  "+ Show more",
+                                  style: TextStyle(
+                                      fontFamily: 'Gotham',
+                                      fontSize: 18,
+                                      color: Color.fromARGB(255, 26, 198, 255)),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              color: Colors.black45,
+                              height: 1,
+                              width: MediaQuery.of(context).size.width * 0.9,
+                            )
+                          ],
+                        );
+                    })),
           ],
         ),
         bottomNavigationBar: BottomAppBar(
           color: Colors.transparent,
           child: Container(
-              color: Colors.transparent,
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.home_filled),
-                      color: Colors.white60,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          PageRouteBuilder(
-                            pageBuilder: (c, a1, a2) => HomePage(),
-                            transitionsBuilder: (c, anim, a2, child) =>
-                                FadeTransition(opacity: anim, child: child),
-                            transitionDuration: Duration(milliseconds: 200),
-                          ),
-                        );
-                      },
-                    ),
-                    // IconButton(
-                    //   icon: Icon(Icons.search),
-                    //   color: Colors.white60,
-                    //   onPressed: () {},
-                    // ),
-                    IconButton(
-                      icon: Icon(Icons.add),
-                      color: Colors.white60,
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.list_rounded),
-                      color: Color.fromARGB(236, 27, 241, 234),
-                      onPressed: () {},
-                    ),
-                  ])),
+                IconButton(
+                  icon: Icon(Icons.home_filled),
+                  color: Colors.white60,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (c, a1, a2) => HomePage(),
+                        transitionsBuilder: (c, anim, a2, child) =>
+                            FadeTransition(opacity: anim, child: child),
+                        transitionDuration: Duration(milliseconds: 200),
+                      ),
+                    );
+                  },
+                ),
+                // IconButton(
+                //   icon: Icon(Icons.search),
+                //   color: Colors.white60,
+                //   onPressed: () {},
+                // ),
+                IconButton(
+                  icon: Icon(Icons.add),
+                  color: Colors.white60,
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: Icon(Icons.list_rounded),
+                  color: Color.fromARGB(236, 27, 241, 234),
+                  onPressed: () {},
+                ),
+              ])),
         ));
   }
 }

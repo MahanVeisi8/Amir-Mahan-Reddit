@@ -347,7 +347,7 @@ class _HomePageState extends State<HomePage> {
                                     style: TextStyle(
                                       fontFamily: 'Gotham',
                                       fontSize: 12,
-                                      color: Color.fromARGB(255, 10, 203, 174),
+                                      color: Colors.white70,
                                     )),
                               ),
                               Container(color: Colors.transparent, width: 8)
