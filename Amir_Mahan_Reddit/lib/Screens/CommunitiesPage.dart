@@ -34,7 +34,12 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
     communities[0].addMember(new User("Mahan", "email", "password", false));
     communities[0].addMember(new User("Sobhan", "email", "password", false));
     communities[0].addMember(new User("Matin", "email", "password", false));
-
+    communities[0].addMember(new User("Setareh", "email", "password", false));
+    communities[0].addMember(new User("Amir", "email", "password", false));
+    communities[0].addMember(new User("Safi", "email", "password", false));
+    communities[0].addMember(new User("Mahan", "email", "password", false));
+    communities[0].addMember(new User("Sobhan", "email", "password", false));
+    communities[0].addMember(new User("Matin", "email", "password", false));
     communities[0].addPost(new Post(
         new User("Setareh", "email", "password", false),
         communities[0],
