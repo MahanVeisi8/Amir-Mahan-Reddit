@@ -448,9 +448,10 @@ class SearchBox extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     List<Post> filteredPosts = posts.where((post) {
-      final result = post.title.toLowerCase();
+      final titleResult = post.title.toLowerCase();
+      final descriptionResult = post.description.toLowerCase();
       final input = query.toLowerCase();
-      return result.contains(input);
+      return titleResult.contains(input) || descriptionResult.contains(input);
     }).toList();
     initializer();
     return Container(
