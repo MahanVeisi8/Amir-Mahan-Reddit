@@ -28,6 +28,43 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
         new User("Setareh", "email", "password", false),
         "Logical_Circuits",
         "Here's a community for people who like to discuss logical circuits! Feel free to ask questions, and join the discussion!"));
+    communities[0].addMember(new User("Setareh", "email", "password", false));
+    communities[0].addMember(new User("Amir", "email", "password", false));
+    communities[0].addMember(new User("Safi", "email", "password", false));
+    communities[0].addMember(new User("Mahan", "email", "password", false));
+    communities[0].addMember(new User("Sobhan", "email", "password", false));
+    communities[0].addMember(new User("Matin", "email", "password", false));
+
+    communities[0].addPost(new Post(
+        new User("Setareh", "email", "password", false),
+        communities[0],
+        "Alright, Welcome everyone! I'm admin and I'd be happy to answer Ur questions!",
+        "I think that's a good idea, but I'm not sure if I can answer your question. I'll ask my friends and colleagues to help me out. Thank you for your patience!"));
+    communities[0].addPost(new Post(
+        new User("Amir", "email", "password", false),
+        communities[0],
+        "Such a shame that I can't study LC in this semester :(",
+        "Maybe next semester :)"));
+    communities[0].addPost(new Post(
+        new User("Mahan", "email", "password", false),
+        communities[0],
+        "Mitooni rajebesh geeeryee koniiii",
+        "feshar bokhor madar elek fan"));
+    communities[0].addPost(new Post(
+        new User("Sobhan", "email", "password", false),
+        communities[0],
+        "Ali ye helicopter oonjas, berim savar shim",
+        "yaay cheghad enemy"));
+    communities[0].addPost(new Post(
+        new User("Matin", "email", "password", false),
+        communities[0],
+        "Eeeh Eeeeh Eeeeeeeh Eeeh (*Laughing deadly)",
+        "fasle jadide Better Call Saul Oooomad! OOOh yesss"));
+    communities[0].addPost(new Post(
+        new User("Amir", "email", "password", false),
+        communities[0],
+        "Sagharam shekasteh ey saghi",
+        "Rafteam ze dast be mowla"));
     communities.add(new Community(new User("Amir", "email", "password", true),
         "Foosball_Kings", "Soccer is cool, but it's cooler on a table!"));
     communities.add(new Community(
