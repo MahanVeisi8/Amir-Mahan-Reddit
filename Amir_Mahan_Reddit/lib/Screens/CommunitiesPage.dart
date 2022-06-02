@@ -4,6 +4,7 @@ import 'package:Amir_Mahan_Reddit/BasicClasses/Community.dart';
 import 'package:Amir_Mahan_Reddit/BasicClasses/Post.dart';
 import 'package:Amir_Mahan_Reddit/Screens/HomePage.dart';
 import 'package:Amir_Mahan_Reddit/Screens/CommunitiesDetailsPage.dart';
+import 'package:Amir_Mahan_Reddit/Screens/NewPostOrCommunity.dart';
 import 'package:flutter/material.dart';
 
 import '../BasicClasses/Users.dart';
@@ -228,7 +229,17 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
               IconButton(
                 icon: Icon(Icons.add),
                 color: Colors.white60,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (c, a1, a2) => NewPostOrCommunity(),
+                      transitionsBuilder: (c, anim, a2, child) =>
+                          FadeTransition(opacity: anim, child: child),
+                      transitionDuration: Duration(milliseconds: 200),
+                    ),
+                  );
+                },
               ),
               IconButton(
                 icon: Icon(Icons.list_rounded),
