@@ -18,6 +18,7 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
   bool isSignupScreen = true;
   bool isMale = true;
   bool isRememberMe = false;
+  bool passwordVisible = false;
   final regexForEmail = RegExp(r'^[a-zA-Z0-9]+@gmail.com$');
   final regexForLowerCase = RegExp(r'[a-z]+');
   final regexForUpperCase = RegExp(r'[A-Z]+');
@@ -194,10 +195,17 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      buildTextButton(MaterialCommunityIcons.facebook,
-                          "Facebook", Color(0xFF3b5999)),
-                      buildTextButton(MaterialCommunityIcons.google_plus,
-                          "Google", Color(0xFFDB4437)),
+                      // buildTextButton(MaterialCommunityIcons.facebook,
+                      //     "Facebook", Color(0xFF1F2833) ),
+                      FlatButton(
+                          onPressed: () {},
+                          child: buildTextButton(
+                              MaterialCommunityIcons.facebook,
+                              "Facebook",
+                              Color(0xFF1F2833)),
+                      ),
+                      buildTextButton(MaterialCommunityIcons.google,
+                          "Google", Color(0xFF1F2833)),
                     ],
                   ),
                 )
@@ -264,10 +272,21 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
               ),
               minLeadingWidth: 0,
               title: TextFormField(
-                obscureText: true,
+                obscureText: passwordVisible,
                 cursorColor: Color(0xFF66FCF1),
                 decoration: InputDecoration(
                   hintText: "Password",
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      passwordVisible ? Icons.visibility_off : Icons.visibility,
+                      color: Color(0xFF66FCF1),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        passwordVisible = !passwordVisible;
+                      });
+                    },
+                  ),
                   hintStyle: TextStyle(
                     color: Colors.grey,
                     fontSize: 15,
@@ -436,10 +455,23 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
               ),
               minLeadingWidth: 0,
               title: TextFormField(
-                obscureText: true,
+                obscureText: passwordVisible,
                 cursorColor: Color(0xFF66FCF1),
                 decoration: InputDecoration(
                   hintText: "Password",
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      passwordVisible
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                      color: Color(0xFF66FCF1),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        passwordVisible = !passwordVisible;
+                      });
+                    },
+                  ),
                   hintStyle: TextStyle(
                     color: Colors.grey,
                     fontSize: 15,
