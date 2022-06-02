@@ -22,18 +22,6 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
   final regexForLowerCase = RegExp(r'[a-z]+');
   final regexForUpperCase = RegExp(r'[A-Z]+');
   final regexForNumber = RegExp(r'[0-9]+');
-
-  // String userName = userNameController.text;
-  // String email = emailController.text;
-  // String password = passwordController.text;
-  // RegExp regexForEmail = RegExp(r'^[a-zA-Z0-9]+@gmail.com$');
-  // RegExp regexForLowerCase = RegExp(r'[a-z]+');
-  // RegExp regexForUpperCase = RegExp(r'[A-Z]+');
-  // RegExp regexForNumber = RegExp(r'[0-9]+');
-  // bool validPassword = password.length >= 8 &&
-  //     regexForLowerCase.hasMatch(password) &&
-  //     regexForUpperCase.hasMatch(password) &&
-  //     regexForNumber.hasMatch(password);
   User user;
   TextEditingController userNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
