@@ -13,7 +13,7 @@ class _ShowCommunityPostsState extends State<ShowCommunityPosts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF1F2833),
+      backgroundColor: Colors.black87,
       appBar: AppBar(
         title: Text(
           "Blueit",
@@ -23,7 +23,7 @@ class _ShowCommunityPostsState extends State<ShowCommunityPosts> {
               fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        backgroundColor: Color(0xFF1F2833),
+        backgroundColor: Colors.black87,
       ),
       body: Container(
         child: ListView.builder(

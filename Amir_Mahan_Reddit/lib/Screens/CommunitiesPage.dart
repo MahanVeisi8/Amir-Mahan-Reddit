@@ -91,119 +91,118 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
   Widget build(BuildContext context) {
     initializer();
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Color(0xFF1F2833),
-          title: Text(
-            "Communities",
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'Gotham',
-              fontWeight: FontWeight.bold,
-            ),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.black87,
+        title: Text(
+          "Communities",
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: 'Gotham',
+            fontWeight: FontWeight.bold,
           ),
         ),
-        body: Container(
-          child: ListView.builder(
-              itemCount: communities.length,
-              itemBuilder: (BuildContext context, int index) {
-                return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder: (c, a1, a2) => CommunitiesDetailsPage(
-                            community: communities[index],
-                          ),
-                          transitionsBuilder: (c, anim, a2, child) =>
-                              FadeTransition(opacity: anim, child: child),
-                          transitionDuration: Duration(milliseconds: 200),
+      ),
+      body: Container(
+        child: ListView.builder(
+            itemCount: communities.length,
+            itemBuilder: (BuildContext context, int index) {
+              return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (c, a1, a2) => CommunitiesDetailsPage(
+                          community: communities[index],
                         ),
-                      );
-                    },
-                    child: Container(
-                        color: Colors.transparent,
-                        child: Material(
-                            color: Colors.transparent,
-                            child: Column(
-                              children: [
-                                Row(
+                        transitionsBuilder: (c, anim, a2, child) =>
+                            FadeTransition(opacity: anim, child: child),
+                        transitionDuration: Duration(milliseconds: 200),
+                      ),
+                    );
+                  },
+                  child: Container(
+                      color: Colors.transparent,
+                      child: Material(
+                          color: Colors.transparent,
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            right: 10,
+                                            left: 10,
+                                            top: 15,
+                                            bottom: 10),
+                                        child: CircleAvatar(
+                                          backgroundColor: Colors.blueAccent,
+                                        ),
+                                      ),
+                                      Container(
+                                        child: Text(
+                                            "r/" + communities[index].getName(),
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: 'Gotham',
+                                              fontSize: 18,
+                                            )),
+                                      ),
+                                    ],
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {},
+                                    child: Container(
+                                        margin: EdgeInsets.only(right: 15),
+                                        child: Icon(
+                                          Icons.favorite_border_outlined,
+                                          color: Colors.white70,
+                                          size: 28,
+                                        )),
+                                  )
+                                ],
+                              ),
+                              Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                              right: 10,
-                                              left: 10,
-                                              top: 15,
-                                              bottom: 10),
-                                          child: CircleAvatar(
-                                            backgroundColor: Colors.blueAccent,
-                                          ),
-                                        ),
-                                        Container(
-                                          child: Text(
-                                              "r/" +
-                                                  communities[index].getName(),
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: 'Gotham',
-                                                fontSize: 18,
-                                              )),
-                                        ),
-                                      ],
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {},
-                                      child: Container(
-                                          margin: EdgeInsets.only(right: 15),
-                                          child: Icon(
-                                            Icons.favorite_border_outlined,
-                                            color: Colors.white70,
-                                            size: 28,
-                                          )),
-                                    )
-                                  ],
-                                ),
-                                Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Flexible(
-                                          child: Container(
-                                        margin: EdgeInsets.only(
-                                            bottom: 15,
-                                            left: 10,
-                                            right: 10,
-                                            top: 5),
-                                        child: Text(
-                                            communities[index].getDescription(),
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 2,
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(
-                                                fontFamily: 'Gotham',
-                                                fontSize: 12,
-                                                color: Color.fromARGB(
-                                                    177, 255, 255, 255))),
-                                      )),
-                                      Container(
-                                          width: 1,
-                                          height: 1,
-                                          color: Colors.transparent)
-                                    ]),
-                                Container(height: 1, color: Colors.black54)
-                              ],
-                            ))));
-              }),
-        ),
-        backgroundColor: Color(0xFF1F2833),
-        bottomNavigationBar: BottomAppBar(
-          color: Colors.transparent,
-          child: Container(
-              child: Row(
+                                    Flexible(
+                                        child: Container(
+                                      margin: EdgeInsets.only(
+                                          bottom: 15,
+                                          left: 10,
+                                          right: 10,
+                                          top: 5),
+                                      child: Text(
+                                          communities[index].getDescription(),
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 2,
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                              fontFamily: 'Gotham',
+                                              fontSize: 12,
+                                              color: Color.fromARGB(
+                                                  177, 255, 255, 255))),
+                                    )),
+                                    Container(
+                                        width: 1,
+                                        height: 1,
+                                        color: Colors.transparent)
+                                  ]),
+                              Container(height: 1, color: Colors.black54)
+                            ],
+                          ))));
+            }),
+      ),
+      backgroundColor: Colors.black87,
+      bottomNavigationBar: BottomAppBar(
+        child: Container(
+          color: Colors.black87,
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               IconButton(
@@ -221,11 +220,6 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
                   );
                 },
               ),
-              // IconButton(
-              //   icon: Icon(Icons.search),
-              //   color: Colors.white60,
-              //   onPressed: () {},
-              // ),
               IconButton(
                 icon: Icon(Icons.add),
                 color: Colors.white60,
@@ -250,12 +244,21 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
               //   icon: Icon(Icons.settings),
               //   color: Colors.white60,
               //   onPressed: () {
-              //     // Navigator.push(context,
-              //     //     MaterialPageRoute(builder: (context) => Setting()));
+              //     Navigator.push(
+              //       context,
+              //       PageRouteBuilder(
+              //         pageBuilder: (c, a1, a2) => Setting(),
+              //         transitionsBuilder: (c, anim, a2, child) =>
+              //             FadeTransition(opacity: anim, child: child),
+              //         transitionDuration: Duration(milliseconds: 200),
+              //       ),
+              //     );
               //   },
               // ),
             ],
-          )),
-        ));
+          ),
+        ),
+      ),
+    );
   }
 }

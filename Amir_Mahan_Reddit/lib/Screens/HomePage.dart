@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     initializer();
     return Scaffold(
-      backgroundColor: Color(0xFF1F2833),
+      backgroundColor: Colors.black87,
       endDrawer: NavigationDrawerWidget(),
       drawer: Drawer(
         child: ListView(
@@ -92,7 +92,7 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             DrawerHeader(
               child: Text(
-                'Reddit',
+                'Blueit',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -154,7 +154,7 @@ class _HomePageState extends State<HomePage> {
               fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        backgroundColor: Color(0xFF1F2833),
+        backgroundColor: Colors.black87,
       ),
       body: Container(
         child: ListView.builder(
@@ -350,7 +350,7 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: BottomAppBar(
         child: Container(
-          color: Color(0xFF1F2833),
+          color: Colors.black87,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
