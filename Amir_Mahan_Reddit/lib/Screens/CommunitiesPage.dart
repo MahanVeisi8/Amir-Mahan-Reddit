@@ -239,11 +239,6 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
                   );
                 },
               ),
-              // IconButton(
-              //   icon: Icon(Icons.search),
-              //   color: Colors.white60,
-              //   onPressed: () {},
-              // ),
               IconButton(
                 icon: Icon(Icons.add),
                 color: Colors.white60,

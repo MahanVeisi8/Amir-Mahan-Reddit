@@ -515,7 +515,9 @@ class SearchBox extends SearchDelegate {
                                       fontFamily: 'Gotham',
                                       fontSize: 16,
                                       color: Colors.white,
-                                    ))),
+                                    )
+                                )
+                            ),
                             Container(
                                 child: Text(
                                     "r/" + filteredPosts[index].getCommunity().name,
@@ -524,8 +526,11 @@ class SearchBox extends SearchDelegate {
                                       fontFamily: 'Gotham',
                                       fontSize: 13,
                                       color: Colors.white,
-                                    ))),
-                          ]),
+                                    )
+                                )
+                            ),
+                          ]
+                          ),
                         ],
                       ),
                       GestureDetector(
