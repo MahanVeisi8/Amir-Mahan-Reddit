@@ -37,74 +37,36 @@ class _EditProfileState extends State<EditProfile> {
         backgroundColor: Color(0xFF1F2833),
       ),
       body: SingleChildScrollView(
-        child: Container(
-          // height: MediaQuery.of(context).size.height * 0.2,
-          child: Column(
-            children: <Widget>[
-              Center(
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.23,
-                padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.015),
-                  child: CircleAvatar(
-                    backgroundImage: AssetImage('assets/images/AlliSherlock.jpg'),
-                    radius: MediaQuery.of(context).size.width * 0.2,
-                  ),
+        child: Column(
+          children: <Widget>[
+            Center(
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.23,
+              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.015),
+                child: CircleAvatar(
+                  backgroundImage: AssetImage('assets/images/AlliSherlock.jpg'),
+                  radius: MediaQuery.of(context).size.width * 0.2,
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => LoadPage(),
-                    ),
-                  );
-                },
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.05,
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  child: Center(
-                    child: Text(
-                      'Edit Profile',
-                      style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.width * 0.05,
-                        color: Color(0xFF66FCF1),
-                      ),
-                    ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoadPage(),
                   ),
-                  decoration: BoxDecoration(
-                    color: Color(0xFF1F2833),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.09,
+                );
+              },
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.05,
                 width: MediaQuery.of(context).size.width * 0.9,
-                child: TextField(
-                  style: TextStyle(
-                      color: Colors.white,
+                child: Center(
+                  child: Text(
+                    'Edit Profile',
+                    style: TextStyle(
                       fontSize: MediaQuery.of(context).size.width * 0.05,
-                  ),
-                  decoration: InputDecoration(
-                    hintText: 'First name and Last name',
-                    hintStyle: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width * 0.05,
-                      color: Colors.white,
-                    ),
-                    label: Text(
-                      'Name',
-                      style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.width * 0.05,
-                        color: Color(0xFFC5C6C7),
-                      ),
-                    ),
-                    prefixIcon: Icon(
-                      Icons.person_pin,
                       color: Color(0xFF66FCF1),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
                     ),
                   ),
                 ),
@@ -113,148 +75,188 @@ class _EditProfileState extends State<EditProfile> {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.09,
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: TextField(
-                  style: TextStyle(
+            ),
+            Container(
+              // height: MediaQuery.of(context).size.height * 0.09,
+              height: 70,
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: TextField(
+                style: TextStyle(
                     color: Colors.white,
                     fontSize: MediaQuery.of(context).size.width * 0.05,
-                  ),
-                  decoration: InputDecoration(
-                    hintText: 'Example123',
-                    hintStyle: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width * 0.05,
-                      color: Colors.white,
-                    ),
-                    prefixIcon: Icon(
-                      Icons.person,
-                      color: Color(0xFF66FCF1),
-                    ),
-                    label: Text(
-                      'Username',
-                      style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.width * 0.05,
-                        color: Color(0xFFC5C6C7),
-                      ),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
                 ),
-                decoration: BoxDecoration(
-                  color: Color(0xFF1F2833),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.09,
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: TextField(
-                  style: TextStyle(
-                    color: Colors.white,
+                decoration: InputDecoration(
+                  hintText: 'First name and Last name',
+                  hintStyle: TextStyle(
                     fontSize: MediaQuery.of(context).size.width * 0.05,
-                  ),
-                  decoration: InputDecoration(
-                    hintText: 'pasxpas',
-                    hintStyle: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width * 0.05,
-                      color: Colors.white,
-                    ),
-                    prefixIcon: Icon(
-                      Icons.lock,
-                      color: Color(0xFF66FCF1),
-                    ),
-                    label: Text(
-                      'Password',
-                      style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.width * 0.05,
-                        color: Color(0xFFC5C6C7),
-                      ),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                ),
-                decoration: BoxDecoration(
-                  color: Color(0xFF1F2833),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.09,
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: TextField(
-                  style: TextStyle(
                     color: Colors.white,
-                    fontSize: MediaQuery.of(context).size.width * 0.05,
                   ),
-                  decoration: InputDecoration(
-                    hintText: 'Example@gmail.com',
-                    hintStyle: TextStyle(
+                  label: Text(
+                    'Name',
+                    style: TextStyle(
                       fontSize: MediaQuery.of(context).size.width * 0.05,
-                      color: Colors.white,
-                    ),
-                    prefixIcon: Icon(
-                      Icons.email,
-                      color: Color(0xFF66FCF1),
-                    ),
-                    label: Text(
-                      'Email',
-                      style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.width * 0.05,
-                        color: Color(0xFFC5C6C7),
-                      ),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      color: Color(0xFFC5C6C7),
                     ),
                   ),
-                ),
-                decoration: BoxDecoration(
-                  color: Color(0xFF1F2833),
-                  borderRadius: BorderRadius.circular(10),
+                  prefixIcon: Icon(
+                    Icons.person_pin,
+                    color: Color(0xFF66FCF1),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                 ),
               ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.09,
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: TextField(
-                  style: TextStyle(
+              decoration: BoxDecoration(
+                color: Color(0xFF1F2833),
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            Container(
+              // height: MediaQuery.of(context).size.height * 0.09,
+              height: 70,
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: TextField(
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: MediaQuery.of(context).size.width * 0.05,
+                ),
+                decoration: InputDecoration(
+                  hintText: 'Example123',
+                  hintStyle: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width * 0.05,
                     color: Colors.white,
-                    fontSize: MediaQuery.of(context).size.width * 0.05,
                   ),
-                  decoration: InputDecoration(
-                    hintText: '09187654321',
-                    hintStyle: TextStyle(
+                  prefixIcon: Icon(
+                    Icons.person,
+                    color: Color(0xFF66FCF1),
+                  ),
+                  label: Text(
+                    'Username',
+                    style: TextStyle(
                       fontSize: MediaQuery.of(context).size.width * 0.05,
-                      color: Colors.white,
-                    ),
-                    prefixIcon: Icon(
-                      Icons.phone,
-                      color: Color(0xFF66FCF1),
-                    ),
-                    label: Text(
-                      'Phone Number',
-                      style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.width * 0.05,
-                        color: Color(0xFFC5C6C7),
-                      ),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      color: Color(0xFFC5C6C7),
                     ),
                   ),
-                ),
-                decoration: BoxDecoration(
-                  color: Color(0xFF1F2833),
-                  borderRadius: BorderRadius.circular(10),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                 ),
               ),
+              decoration: BoxDecoration(
+                color: Color(0xFF1F2833),
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            Container(
+              // height: MediaQuery.of(context).size.height * 0.09,
+              height: 70,
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: TextField(
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: MediaQuery.of(context).size.width * 0.05,
+                ),
+                decoration: InputDecoration(
+                  hintText: 'pasxpas',
+                  hintStyle: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width * 0.05,
+                    color: Colors.white,
+                  ),
+                  prefixIcon: Icon(
+                    Icons.lock,
+                    color: Color(0xFF66FCF1),
+                  ),
+                  label: Text(
+                    'Password',
+                    style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.05,
+                      color: Color(0xFFC5C6C7),
+                    ),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+              ),
+              decoration: BoxDecoration(
+                color: Color(0xFF1F2833),
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            Container(
+              // height: MediaQuery.of(context).size.height * 0.09,
+              height: 70,
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: TextField(
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: MediaQuery.of(context).size.width * 0.05,
+                ),
+                decoration: InputDecoration(
+                  hintText: 'Example@gmail.com',
+                  hintStyle: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width * 0.05,
+                    color: Colors.white,
+                  ),
+                  prefixIcon: Icon(
+                    Icons.email,
+                    color: Color(0xFF66FCF1),
+                  ),
+                  label: Text(
+                    'Email',
+                    style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.05,
+                      color: Color(0xFFC5C6C7),
+                    ),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+              ),
+              decoration: BoxDecoration(
+                color: Color(0xFF1F2833),
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            Container(
+              // height: MediaQuery.of(context).size.height * 0.09,
+              height: 70,
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: TextField(
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: MediaQuery.of(context).size.width * 0.05,
+                ),
+                decoration: InputDecoration(
+                  hintText: '09187654321',
+                  hintStyle: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width * 0.05,
+                    color: Colors.white,
+                  ),
+                  prefixIcon: Icon(
+                    Icons.phone,
+                    color: Color(0xFF66FCF1),
+                  ),
+                  label: Text(
+                    'Phone Number',
+                    style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.05,
+                      color: Color(0xFFC5C6C7),
+                    ),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+              ),
+              decoration: BoxDecoration(
+                color: Color(0xFF1F2833),
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
     ],
-    )
     ),
       ),
     );

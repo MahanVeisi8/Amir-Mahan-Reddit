@@ -17,6 +17,7 @@ class Post {
   int numLikes;
   int numDislikes;
   int numComments;
+  bool isSaved = false;
 
   Post(User Poster, Community community, String title, String description) {
     this.Poster = Poster;
@@ -45,9 +46,11 @@ class Post {
 
   void addDisike(User disliker) {
     dislikes.add(disliker);
-    numDislikes++;
+    numLikes--;
   }
-
+  void isSave(){
+    this.isSaved = !isSaved;
+  }
   Community getCommunity() {
     return community;
   }

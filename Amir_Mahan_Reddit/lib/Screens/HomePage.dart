@@ -123,7 +123,8 @@ class _HomePageState extends State<HomePage> {
                         transitionsBuilder: (c, anim, a2, child) =>
                             FadeTransition(opacity: anim, child: child),
                         transitionDuration: Duration(milliseconds: 200),
-                      ));
+                      )
+                  );
                 },
                 child: Material(
                   shadowColor: Color(0xFF1F2833),
@@ -164,13 +165,21 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            setState(() {
+                                posts[index].isSaved = !posts[index].isSaved;
+                            });
+                          },
                           child: Container(
                             margin: EdgeInsets.only(right: 12),
                             child: Icon(
-                              Icons.bookmark_border_outlined,
+                              posts[index].isSaved ?
+                              Icons.bookmark
+                                  : Icons.bookmark_border_rounded,
                               size: 30,
-                              color: Color.fromARGB(189, 255, 255, 255),
+                              color: posts[index].isSaved ?
+                              Color(0xFF66FCF1)
+                                  : Color(0xFF66FCF1),
                             ),
                           ),
                         ),
@@ -205,8 +214,12 @@ class _HomePageState extends State<HomePage> {
                                     fontFamily: 'Gotham',
                                     fontSize: 12,
                                     color: Color.fromARGB(177, 255, 255, 255),
-                                  ))))
-                    ]),
+                                  )
+                              )
+                          )
+                      )
+                    ]
+                    ),
                     //like and dislike and comments and date
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -215,16 +228,16 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                // setState(() {
-                                //   posts[index].addLike(widget.user);
-                                // });
+                                setState(() {
+                                  posts[index].addLike( new User("Mahan", "email", "password", true));
+                                });
                               },
                               child: Container(
                                 margin: EdgeInsets.only(
                                     top: 10, left: 10, right: 10, bottom: 10),
                                 child: Icon(
                                   Icons.thumb_up_alt_outlined,
-                                  color: Colors.white,
+                                  color: Color(0xFF66FCF1),
                                   size: 20,
                                 ),
                               ),
@@ -236,20 +249,23 @@ class _HomePageState extends State<HomePage> {
                                     style: TextStyle(
                                       fontFamily: 'Gotham',
                                       fontSize: 16,
-                                      color: Color.fromARGB(205, 38, 97, 244),
-                                    ))),
+                                      color: Colors.white,
+                                    )
+                                )
+                            ),
                             GestureDetector(
-                              onTap: () {
-                                // setState(() {
-                                //   posts[index].addDislike(widget.user);
-                                // });
-                              },
+                                onTap: () {
+                                setState(() {
+                                      posts[index].addDisike( new User("amir", "email", "password", true));
+                                    }
+                                  );
+                                },
                               child: Container(
                                 margin: EdgeInsets.only(
                                     top: 10, left: 10, right: 0, bottom: 10),
                                 child: Icon(
                                   Icons.thumb_down_alt_outlined,
-                                  color: Colors.white,
+                                  color: Color(0xFF66FCF1),
                                   size: 20,
                                 ),
                               ),
@@ -258,9 +274,9 @@ class _HomePageState extends State<HomePage> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            // setState(() {
-                            //   posts[index].addLike(widget.user);
-                            // });
+                            setState(() {
+                              posts[index].addDisike( new User("Mahan", "email", "password", true));
+                            });
                           },
                           child: Container(
                             child: Text(
