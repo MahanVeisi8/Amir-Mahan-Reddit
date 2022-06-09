@@ -36,9 +36,9 @@ class _LoadPageState extends State<LoadPage> {
           ),
         ),
         automaticallyImplyLeading: true,
-        backgroundColor: Color(0xFF1F2833),
+        backgroundColor: Colors.black87,
       ),
-      backgroundColor: Color(0xFF1F2833),
+      backgroundColor: Colors.black87,
       body: SafeArea(
           child: SingleChildScrollView(
             child: Container(

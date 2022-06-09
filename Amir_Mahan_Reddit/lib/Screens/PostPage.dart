@@ -339,7 +339,7 @@ class _PostPageState extends State<PostPage> {
                                         fontFamily: 'Gotham',
                                         fontSize: 12,
                                         color:
-                                            Color.fromARGB(255, 10, 203, 174),
+                                            Colors.white70,
                                       )),
                                 )
                               ],

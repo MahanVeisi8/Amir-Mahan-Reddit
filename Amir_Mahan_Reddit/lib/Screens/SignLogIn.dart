@@ -30,17 +30,17 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Palette.backgroundColor,
+      backgroundColor: Colors.black87,
       body: Stack(
         children: [
-          Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-              image: AssetImage("assets/images/signInBackground2.jpg"),
-              fit: BoxFit.cover,
-            )
-            ),
-          ),
+          // Container(
+          //   decoration: BoxDecoration(
+          //       image: DecorationImage(
+          //     image: AssetImage("assets/images/signInBackground2.jpg"),
+          //     fit: BoxFit.cover,
+          //   )
+          //   ),
+          // ),
           Positioned(
             top: 30,
             right: 0,
@@ -653,10 +653,10 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                 regexForNumber.hasMatch(password);
             // bool validEmail = regexForEmail.hasMatch(email);
             // // !!!!!!!!!!!!! MUST MOVE THIS PART TO ELSE BEFORE MERGE !!!!!!!!!!!!!
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage()),
-            );
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => HomePage()),
+            // );
             // welcomePage replaced with HomePage
             // // !!!!!!!!!!!!! MUST MOVE THIS PART TO ELSE BEFORE MERGE !!!!!!!!!!!!!
             if (userName.isEmpty || email.isEmpty || password.isEmpty) {
@@ -798,25 +798,3 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
     );
   }
 }
-
-void showButtomToast() => Fluttertoast.showToast(
-    msg: "This is Center Short Toast",
-    toastLength: Toast.LENGTH_SHORT,
-    gravity: ToastGravity.CENTER,
-    timeInSecForIosWeb: 2,
-    backgroundColor: Colors.red,
-    textColor: Colors.white,
-    fontSize: 16.0);
-
-// void showButtomToast() {
-//   Fluttertoast.showToast(
-//       msg: "Please fill all the fields correctly!",
-//
-//       // toastLength: Toast.LENGTH_SHORT,
-//       // gravity: ToastGravity.BOTTOM,
-//       // timeInSecForIosWeb: 5,
-//       // backgroundColor: Colors.red,
-//       // textColor: Colors.black,
-//       // fontSize: 16.0
-//   );
-// }

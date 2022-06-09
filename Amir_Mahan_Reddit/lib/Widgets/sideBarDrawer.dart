@@ -68,12 +68,6 @@ class NavigationDrawerWidget extends StatelessWidget {
                     icon: Icons.info,
                     onClicked: () => selectedItem(context, 4),
                   ),
-                  // const SizedBox(height: 10),
-                  // buildMenuItem(
-                  //   text: 'Notifications',
-                  //   icon: Icons.notifications_outlined,
-                  //   onClicked: () => selectedItem(context, 5),
-                  // ),
                 ],
               ),
             ),

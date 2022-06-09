@@ -27,6 +27,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 image: DecorationImage(
               image: AssetImage(widget.image),
               fit: BoxFit.cover,
-            ))));
+            )
+            )
+        )
+    );
   }
 }

@@ -48,13 +48,14 @@ class _AddPost2State extends State<AddPost2> {
     communities.add(new Community(new User("Sobhan", "email", "password", true),
         "Call_Of_Duty_Noobs", "If you're a noob like us, join us!"));
   }
+
   @override
   Widget build(BuildContext context) {
     initializer();
     return Scaffold(
-      backgroundColor: Color(0xFF1F2833),
+      backgroundColor: Colors.black87,
       appBar: AppBar(
-        backgroundColor: Color(0xFF1F2833),
+        backgroundColor: Colors.black87,
         title: Text(
           "Post to",
           style: TextStyle(
@@ -78,7 +79,7 @@ class _AddPost2State extends State<AddPost2> {
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
@@ -96,8 +97,7 @@ class _AddPost2State extends State<AddPost2> {
                                       ),
                                       Container(
                                         child: Text(
-                                            "r/" +
-                                                communities[index].getName(),
+                                            "r/" + communities[index].getName(),
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontFamily: 'Gotham',
@@ -110,26 +110,26 @@ class _AddPost2State extends State<AddPost2> {
                               ),
                               Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Flexible(
                                         child: Container(
-                                          margin: EdgeInsets.only(
-                                              bottom: 15,
-                                              left: 10,
-                                              right: 10,
-                                              top: 5),
-                                          child: Text(
-                                              communities[index].getDescription(),
-                                              overflow: TextOverflow.ellipsis,
-                                              maxLines: 2,
-                                              textAlign: TextAlign.left,
-                                              style: TextStyle(
-                                                  fontFamily: 'Gotham',
-                                                  fontSize: 12,
-                                                  color: Color.fromARGB(
-                                                      177, 255, 255, 255))),
-                                        )),
+                                      margin: EdgeInsets.only(
+                                          bottom: 15,
+                                          left: 10,
+                                          right: 10,
+                                          top: 5),
+                                      child: Text(
+                                          communities[index].getDescription(),
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 2,
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                              fontFamily: 'Gotham',
+                                              fontSize: 12,
+                                              color: Color.fromARGB(
+                                                  177, 255, 255, 255))),
+                                    )),
                                     Container(
                                         width: 1,
                                         height: 1,
@@ -137,12 +137,8 @@ class _AddPost2State extends State<AddPost2> {
                                   ]),
                               Container(height: 1, color: Colors.black54)
                             ],
-                          )
-                      )
-                  )
-              );
-            }
-            ),
+                          ))));
+            }),
       ),
     );
   }

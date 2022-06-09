@@ -13,6 +13,7 @@ import 'package:Amir_Mahan_Reddit/Widgets/AnimationRoute.dart';
 
 import '../BasicClasses/Comment.dart';
 import '../BasicClasses/Community.dart';
+import 'package:Amir_Mahan_Reddit/Screens/NewPostOrCommunity.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key, this.user}) : super(key: key);
@@ -31,7 +32,7 @@ class _HomePageState extends State<HomePage> {
     posts.add(new Post(
         new User("Amir", "email", "password", true),
         com,
-        "hey motherfuckers! welcome to this app! this is the first caption!",
+        "hey guys! welcome to this app! this is the first caption!",
         "this is the long fucking caption that is supposed to be nothing just a long boring long bullshit long test"));
 
     posts[0].addComment(new Comment("Yes And I Loooove it!!! U rock brooo",
@@ -41,7 +42,7 @@ class _HomePageState extends State<HomePage> {
         new User("Setareh", "email", "password", false), posts[0]));
 
     posts[0].addComment(new Comment(
-        "Ridi.", new User("mahan", "email", "password", true), posts[0]));
+        "damet garm.", new User("mahan", "email", "password", true), posts[0]));
     posts[0].addComment(new Comment("Namoosan Pashamam",
         new User("Sobhan", "email", "password", true), posts[0]));
 
@@ -84,7 +85,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     initializer();
     return Scaffold(
-      backgroundColor: Color(0xFF1F2833),
+      backgroundColor:Colors.black87,
       drawer: NavigationDrawerWidget(),
       appBar: AppBar(
         actions: [
@@ -105,7 +106,7 @@ class _HomePageState extends State<HomePage> {
               fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        backgroundColor: Color(0xFF1F2833),
+        backgroundColor: Colors.black87,
       ),
       body: Container(
         child: ListView.builder(
@@ -123,7 +124,8 @@ class _HomePageState extends State<HomePage> {
                         transitionsBuilder: (c, anim, a2, child) =>
                             FadeTransition(opacity: anim, child: child),
                         transitionDuration: Duration(milliseconds: 200),
-                      ));
+                      )
+                  );
                 },
                 child: Material(
                   shadowColor: Color(0xFF1F2833),
@@ -139,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                                   top: 10, left: 10, right: 10, bottom: 10),
                               child: CircleAvatar(
                                 backgroundImage:
-                                    AssetImage('assets/images/Avatar2.png'),
+                                AssetImage('assets/images/Avatar2.png'),
                               ),
                             ),
                             Column(children: [
@@ -164,13 +166,21 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            setState(() {
+                              posts[index].isSaved = !posts[index].isSaved;
+                            });
+                          },
                           child: Container(
                             margin: EdgeInsets.only(right: 12),
                             child: Icon(
-                              Icons.bookmark_border_outlined,
+                              posts[index].isSaved ?
+                              Icons.bookmark
+                                  : Icons.bookmark_border_rounded,
                               size: 30,
-                              color: Color.fromARGB(189, 255, 255, 255),
+                              color: posts[index].isSaved ?
+                              Color(0xFF66FCF1)
+                                  : Color(0xFF66FCF1),
                             ),
                           ),
                         ),
@@ -205,8 +215,12 @@ class _HomePageState extends State<HomePage> {
                                     fontFamily: 'Gotham',
                                     fontSize: 12,
                                     color: Color.fromARGB(177, 255, 255, 255),
-                                  ))))
-                    ]),
+                                  )
+                              )
+                          )
+                      )
+                    ]
+                    ),
                     //like and dislike and comments and date
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -215,16 +229,16 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                // setState(() {
-                                //   posts[index].addLike(widget.user);
-                                // });
+                                setState(() {
+                                  posts[index].addLike( new User("Mahan", "email", "password", true));
+                                });
                               },
                               child: Container(
                                 margin: EdgeInsets.only(
                                     top: 10, left: 10, right: 10, bottom: 10),
                                 child: Icon(
                                   Icons.thumb_up_alt_outlined,
-                                  color: Colors.white,
+                                  color: Color(0xFF66FCF1),
                                   size: 20,
                                 ),
                               ),
@@ -236,20 +250,23 @@ class _HomePageState extends State<HomePage> {
                                     style: TextStyle(
                                       fontFamily: 'Gotham',
                                       fontSize: 16,
-                                      color: Color.fromARGB(205, 38, 97, 244),
-                                    ))),
+                                      color: Colors.white,
+                                    )
+                                )
+                            ),
                             GestureDetector(
                               onTap: () {
-                                // setState(() {
-                                //   posts[index].addDislike(widget.user);
-                                // });
+                                setState(() {
+                                  posts[index].addDisike( new User("amir", "email", "password", true));
+                                }
+                                );
                               },
                               child: Container(
                                 margin: EdgeInsets.only(
                                     top: 10, left: 10, right: 0, bottom: 10),
                                 child: Icon(
                                   Icons.thumb_down_alt_outlined,
-                                  color: Colors.white,
+                                  color: Color(0xFF66FCF1),
                                   size: 20,
                                 ),
                               ),
@@ -258,9 +275,9 @@ class _HomePageState extends State<HomePage> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            // setState(() {
-                            //   posts[index].addLike(widget.user);
-                            // });
+                            setState(() {
+                              posts[index].addDisike( new User("Mahan", "email", "password", true));
+                            });
                           },
                           child: Container(
                             child: Text(
@@ -291,17 +308,19 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                     Container(
-                      color: Colors.black45,
-                      height: 1,
+                      color: Colors.white30,
+                      height: 1.5,
                     ),
                   ]),
-                ));
+                )
+            );
           },
         ),
       ),
       bottomNavigationBar: BottomAppBar(
+        color: Colors.black87,
         child: Container(
-          color: Color(0xFF1F2833),
+          // color: Colors.black87,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
@@ -314,7 +333,7 @@ class _HomePageState extends State<HomePage> {
                 icon: Icon(Icons.add),
                 color: Colors.white60,
                 onPressed: () {
-                  Navigator.of(context).push(createRoute(AddPost(), 0));
+                  Navigator.of(context).push(createRoute(NewPostOrCommunity(), 0));
                 },
               ),
               IconButton(
@@ -488,7 +507,7 @@ class SearchBox extends SearchDelegate {
                                 top: 10, left: 10, right: 10, bottom: 10),
                             child: CircleAvatar(
                               backgroundImage:
-                                  AssetImage('assets/images/Avatar2.png'),
+                              AssetImage('assets/images/Avatar2.png'),
                             ),
                           ),
                           Column(children: [
@@ -499,7 +518,9 @@ class SearchBox extends SearchDelegate {
                                       fontFamily: 'Gotham',
                                       fontSize: 16,
                                       color: Colors.white,
-                                    ))),
+                                    )
+                                )
+                            ),
                             Container(
                                 child: Text(
                                     "r/" + filteredPosts[index].getCommunity().name,
@@ -508,8 +529,11 @@ class SearchBox extends SearchDelegate {
                                       fontFamily: 'Gotham',
                                       fontSize: 13,
                                       color: Colors.white,
-                                    ))),
-                          ]),
+                                    )
+                                )
+                            ),
+                          ]
+                          ),
                         ],
                       ),
                       GestureDetector(
