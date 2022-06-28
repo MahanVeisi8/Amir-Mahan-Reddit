@@ -90,6 +90,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         actions: [
           IconButton(
+
               icon: Icon(Icons.search, color: Colors.white),
               onPressed: () {
                 showSearch(
@@ -110,6 +111,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Container(
         child: ListView.builder(
+
           itemCount: posts.length,
           itemBuilder: (BuildContext context, int index) {
             return GestureDetector(
