@@ -9,16 +9,17 @@ blueIt! is a mobile application built using Flutter and Dart for the frontend an
 - Messaging between users
 - Customizable user profiles
 
-## Screenshots
+## Runtime videos
 
-### Log in Feed
-![Log_in_Feed](asset/1.gif)
 
-### Home Feed
-![Post_Creation](asset/2.gif)
+<table>
+  <tr>
+    <td>Log in Feed<br><img src="asset/1.gif" alt="Log in Feed" width="250px"></td>
+    <td>Home Feed<br><img src="asset/2.gif" alt="Home Feed" width="250px"></td>
+    <td>Post Creation<br><img src="asset/3.gif" alt="Post Creation" width="250px"></td>
+  </tr>
+</table>
 
-### Post Creation
-![Post_Creation](asset/3.gif)
 
 ## About Us
 ![About Us](asset/aboutus.png)
