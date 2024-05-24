@@ -12,13 +12,13 @@ blueIt! is a mobile application built using Flutter and Dart for the frontend an
 ## Screenshots
 
 ### Log in Feed
-![Home Feed](asset/1.gif)
+![Log_in_Feed](asset/1.gif)
 
 ### Home Feed
-![Post Creation](/path/to/post_creation.gif)
+![Post_Creation](asset/2.gif)
 
 ### Post Creation
-![Messaging](/path/to/messaging.gif)
+![Post_Creation](asset/3.gif)
 
 ## About Us
-![About Us](/path/to/about_us.png)
+![About Us](asset/aboutus.png)
