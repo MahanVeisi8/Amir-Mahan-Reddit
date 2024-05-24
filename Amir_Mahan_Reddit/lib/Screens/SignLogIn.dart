@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:Amir_Mahan_Reddit/Screens/HomePage.dart';
+import 'package:Amir_Mahan_Reddit/main.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:Amir_Mahan_Reddit/Screens/WelcomePage.dart';
@@ -10,15 +13,25 @@ import 'package:Amir_Mahan_Reddit/BasicClasses/Post.dart';
 import 'package:Amir_Mahan_Reddit/BasicClasses/Users.dart';
 
 class LoginSignupScreen extends StatefulWidget {
+  Socket socket;
+  // static bool isValidInDataBase = false;
   @override
   LoginSignupScreenState createState() => LoginSignupScreenState();
 }
 
 class LoginSignupScreenState extends State<LoginSignupScreen> {
+  static bool isValidInDataBase = false;
+  String userName;
+  String password;
+  String email;
   bool isSignupScreen = true;
   bool isMale = true;
   bool isRememberMe = false;
+  bool passwordVisible = false;
   final regexForEmail = RegExp(r'^[a-zA-Z0-9]+@gmail.com$');
+  final regexForLowerCase = RegExp(r'[a-z]+');
+  final regexForUpperCase = RegExp(r'[A-Z]+');
+  final regexForNumber = RegExp(r'[0-9]+');
   User user;
   TextEditingController userNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -26,28 +39,14 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Palette.backgroundColor,
+      backgroundColor: Colors.black87,
       body: Stack(
         children: [
-          Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-              image: AssetImage("assets/images/signInBackground2.jpg"),
-              fit: BoxFit.cover,
-            )
-            ),
-          ),
           Positioned(
-            top: 0,
+            top: 30,
             right: 0,
             left: 0,
             child: Container(
-              // decoration: BoxDecoration(
-              //     image: DecorationImage(
-              //         image: AssetImage("assets/images/signInBackground2.jpg"),
-              //         fit: BoxFit.cover,
-              //       )
-              // ),
               child: Container(
                 padding: EdgeInsets.only(top: 30, left: 30),
                 // color: Color(0xFF3b5999).withOpacity(.85),
@@ -56,19 +55,19 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                   children: [
                     RichText(
                       text: TextSpan(
-                          text: "Welcome to",
+                          text: "Welcome to ",
                           style: TextStyle(
                             fontSize: 25,
                             letterSpacing: 2,
-                            color: Colors.yellow[700],
+                            color: Colors.white70,
                           ),
                           children: [
                             TextSpan(
-                              text: isSignupScreen ? " Rizona," : " Back,",
+                              text: "BlueIt",
                               style: TextStyle(
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.yellow[700],
+                                color: Color(0xFF66FCF1),
                               ),
                             )
                           ]),
@@ -96,7 +95,7 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
           AnimatedPositioned(
             duration: Duration(milliseconds: 400),
             curve: Curves.bounceInOut,
-            top: isSignupScreen ? 90 : 120,
+            top: isSignupScreen ? 120 : 140,
             child: AnimatedContainer(
               duration: Duration(milliseconds: 400),
               curve: Curves.bounceInOut,
@@ -105,7 +104,7 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
               width: MediaQuery.of(context).size.width - 40,
               margin: EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Color(0xFF1F2833).withOpacity(.85),
                   borderRadius: BorderRadius.circular(15),
                   boxShadow: [
                     BoxShadow(
@@ -133,15 +132,15 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     color: !isSignupScreen
-                                        ? Palette.activeColor
-                                        : Palette.textColor1),
+                                        ? Color(0xFF66FCF1)
+                                        : Colors.white),
                               ),
                               if (!isSignupScreen)
                                 Container(
                                   margin: EdgeInsets.only(top: 3),
                                   height: 2,
                                   width: 55,
-                                  color: Colors.orange,
+                                  color: Color(0xFF45A29E),
                                 )
                             ],
                           ),
@@ -159,16 +158,16 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                                 style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
-                                    color: isSignupScreen
-                                        ? Palette.activeColor
-                                        : Palette.textColor1),
+                                    color: !isSignupScreen
+                                        ? Colors.white
+                                        : Color(0xFF66FCF1)),
                               ),
                               if (isSignupScreen)
                                 Container(
                                   margin: EdgeInsets.only(top: 3),
                                   height: 2,
                                   width: 55,
-                                  color: Colors.orange,
+                                  color: Color(0xFF45A29E),
                                 )
                             ],
                           ),
@@ -197,10 +196,15 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      buildTextButton(MaterialCommunityIcons.facebook,
-                          "Facebook", Palette.facebookColor),
-                      buildTextButton(MaterialCommunityIcons.google_plus,
-                          "Google", Palette.googleColor),
+                      // buildTextButton(MaterialCommunityIcons.facebook,
+                      //     "Facebook", Color(0xFF1F2833) ),
+                      FlatButton(
+                        onPressed: () {},
+                        child: buildTextButton(MaterialCommunityIcons.facebook,
+                            "Facebook", Color(0xFF1F2833)),
+                      ),
+                      buildTextButton(MaterialCommunityIcons.google, "Google",
+                          Color(0xFF1F2833)),
                     ],
                   ),
                 )
@@ -217,17 +221,115 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
       margin: EdgeInsets.only(top: 20),
       child: Column(
         children: [
-          buildTextField(Icons.mail_outline, "info@demouri.com", false, true),
-          buildTextField(
-              MaterialCommunityIcons.lock_outline, "**********", true, false),
+          Container(
+            child: ListTile(
+              leading: Icon(
+                MaterialCommunityIcons.account_outline,
+                color: Color(0xFF66FCF1),
+              ),
+              minLeadingWidth: 0,
+              title: TextFormField(
+                onTap: () {
+                  setState(() {
+                    // isSignupScreen = true;
+                  });
+                },
+                cursorColor: Color(0xFF66FCF1),
+                decoration: InputDecoration(
+                  hintText: "User Name",
+                  hintStyle: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.white,
+                ),
+                controller: userNameController,
+                keyboardType: TextInputType.text,
+                maxLines: 1,
+              ),
+              trailing: Icon(
+                userNameController.text.isEmpty ? Icons.close : Icons.check,
+                color: Color(0xFF66FCF1),
+              ),
+            ),
+          ),
+          Container(
+            child: ListTile(
+              leading: Icon(
+                MaterialCommunityIcons.lock_outline,
+                color: Color(0xFF66FCF1),
+              ),
+              minLeadingWidth: 0,
+              title: TextFormField(
+                obscureText: passwordVisible,
+                cursorColor: Color(0xFF66FCF1),
+                decoration: InputDecoration(
+                  hintText: "Password",
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      passwordVisible ? Icons.visibility_off : Icons.visibility,
+                      color: Color(0xFF66FCF1),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        passwordVisible = !passwordVisible;
+                      });
+                    },
+                  ),
+                  hintStyle: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.white,
+                ),
+                controller: passwordController,
+                keyboardType: TextInputType.text,
+                maxLines: 1,
+              ),
+              trailing: Icon(
+                passwordController.text.isEmpty
+                    ? Icons.close
+                    : !regexForLowerCase.hasMatch(passwordController.text)
+                        ? Icons.close
+                        : !regexForUpperCase.hasMatch(passwordController.text)
+                            ? Icons.close
+                            : !regexForNumber.hasMatch(passwordController.text)
+                                ? Icons.close
+                                : passwordController.text.length < 8
+                                    ? Icons.close
+                                    : Icons.check,
+                color: Color(0xFF66FCF1),
+              ),
+            ),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
                   Checkbox(
+                    // focusColor: Color(0xFF66FCF1),
                     value: isRememberMe,
-                    activeColor: Palette.textColor2,
+                    hoverColor: Colors.white,
+                    activeColor: Colors.transparent,
+                    checkColor: Color(0xFF66FCF1),
+                    shape: CircleBorder(),
                     onChanged: (value) {
                       setState(() {
                         isRememberMe = !isRememberMe;
@@ -235,13 +337,13 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                     },
                   ),
                   Text("Remember me",
-                      style: TextStyle(fontSize: 12, color: Palette.textColor1))
+                      style: TextStyle(fontSize: 12, color: Colors.white))
                 ],
               ),
               TextButton(
                 onPressed: () {},
                 child: Text("Forgot Password?",
-                    style: TextStyle(fontSize: 12, color: Palette.textColor1)),
+                    style: TextStyle(fontSize: 12, color: Color(0xFF66FCF1))),
               )
             ],
           )
@@ -259,9 +361,16 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
             child: ListTile(
               leading: Icon(
                 MaterialCommunityIcons.account_outline,
+                color: Color(0xFF66FCF1),
               ),
               minLeadingWidth: 0,
               title: TextFormField(
+                onTap: () {
+                  setState(() {
+                    // isSignupScreen = true;
+                  });
+                },
+                cursorColor: Color(0xFF66FCF1),
                 decoration: InputDecoration(
                   hintText: "User Name",
                   hintStyle: TextStyle(
@@ -276,15 +385,15 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                 ),
                 style: TextStyle(
                   fontSize: 15,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
                 controller: userNameController,
                 keyboardType: TextInputType.text,
                 maxLines: 1,
               ),
               trailing: Icon(
-                Icons.check,
-                color: Colors.green,
+                userNameController.text.isEmpty ? Icons.close : Icons.check,
+                color: Color(0xFF66FCF1),
               ),
             ),
           ),
@@ -292,9 +401,14 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
             child: ListTile(
               leading: Icon(
                 MaterialCommunityIcons.email_outline,
+                color: Color(0xFF66FCF1),
               ),
               minLeadingWidth: 0,
               title: TextFormField(
+                onTap: () {
+                  setState(() {});
+                },
+                cursorColor: Color(0xFF66FCF1),
                 decoration: InputDecoration(
                   hintText: "Email",
                   hintStyle: TextStyle(
@@ -302,6 +416,9 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
                   ),
+                  // hoverColor: Color(0xFF66FCF1),
+                  // focusColor: Color(0xFF66FCF1),
+
                   contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 0),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -309,15 +426,18 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                 ),
                 style: TextStyle(
                   fontSize: 15,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
                 controller: emailController,
                 keyboardType: TextInputType.text,
                 maxLines: 1,
               ),
               trailing: Icon(
-                Icons.check,
-                color: Colors.green,
+                regexForEmail.hasMatch(emailController.text)
+                    ? Icons.check
+                    : Icons.close,
+                // Icons.check,
+                color: Color(0xFF66FCF1),
               ),
             ),
           ),
@@ -325,11 +445,25 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
             child: ListTile(
               leading: Icon(
                 MaterialCommunityIcons.lock_outline,
+                color: Color(0xFF66FCF1),
               ),
               minLeadingWidth: 0,
               title: TextFormField(
+                obscureText: passwordVisible,
+                cursorColor: Color(0xFF66FCF1),
                 decoration: InputDecoration(
                   hintText: "Password",
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      passwordVisible ? Icons.visibility_off : Icons.visibility,
+                      color: Color(0xFF66FCF1),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        passwordVisible = !passwordVisible;
+                      });
+                    },
+                  ),
                   hintStyle: TextStyle(
                     color: Colors.grey,
                     fontSize: 15,
@@ -342,50 +476,28 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                 ),
                 style: TextStyle(
                   fontSize: 15,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
                 controller: passwordController,
                 keyboardType: TextInputType.text,
                 maxLines: 1,
               ),
               trailing: Icon(
-                Icons.check,
-                color: Colors.green,
+                passwordController.text.isEmpty
+                    ? Icons.close
+                    : !regexForLowerCase.hasMatch(passwordController.text)
+                        ? Icons.close
+                        : !regexForUpperCase.hasMatch(passwordController.text)
+                            ? Icons.close
+                            : !regexForNumber.hasMatch(passwordController.text)
+                                ? Icons.close
+                                : passwordController.text.length < 8
+                                    ? Icons.close
+                                    : Icons.check,
+                color: Color(0xFF66FCF1),
               ),
             ),
           ),
-          // child: TextFormField(
-          //   decoration: InputDecoration(
-          //     hintText: "User Name",
-          //     hintStyle: TextStyle(
-          //       color: Colors.grey,
-          //       fontSize: 15,
-          //       fontWeight: FontWeight.w600,
-          //
-          //     ),
-          //     contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-          //     border: OutlineInputBorder(
-          //       borderRadius: BorderRadius.circular(30),
-          //     ),
-          //
-          //   ),
-          //   style: TextStyle(
-          //     fontSize: 15,
-          //     color: Colors.black,
-          //   ),
-          //   controller: userNameController,
-          //   keyboardType: TextInputType.text,
-          //   maxLines: 1,
-          //
-          // ),
-
-          // buildTextField(MaterialCommunityIcons.account_outline, "User Name",
-          //     false, false),
-          // buildTextField(
-          //     MaterialCommunityIcons.email_outline, "email", false, true
-          // ),
-          // buildTextField(
-          //     MaterialCommunityIcons.lock_outline, "password", true, false),
           Padding(
             padding: const EdgeInsets.only(top: 10, left: 10),
             child: Row(
@@ -404,18 +516,16 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                         height: 30,
                         margin: EdgeInsets.only(right: 8),
                         decoration: BoxDecoration(
-                            color: isMale
-                                ? Palette.textColor2
-                                : Colors.transparent,
+                            color: Colors.transparent,
                             border: Border.all(
                                 width: 1,
                                 color: isMale
-                                    ? Colors.transparent
-                                    : Palette.textColor1),
+                                    ? Color(0xFF66FCF1)
+                                    : Colors.transparent),
                             borderRadius: BorderRadius.circular(15)),
                         child: Icon(
                           MaterialCommunityIcons.account_outline,
-                          color: isMale ? Colors.white : Palette.iconColor,
+                          color: isMale ? Color(0xFF66FCF1) : Palette.iconColor,
                         ),
                       ),
                       Text(
@@ -428,23 +538,6 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                 SizedBox(
                   width: 30,
                 ),
-                // Container(
-                //   // width: 200,
-                //   margin: EdgeInsets.only(top: 20),
-                //   child: RichText(
-                //     textAlign: TextAlign.center,
-                //     text: TextSpan(
-                //         text: "By pressing 'Submit' you agree \nto our ",
-                //         style: TextStyle(color: Palette.textColor2),
-                //         children: [
-                //           TextSpan(
-                //             text: "term & conditions",
-                //             style: TextStyle(color: Colors.orange),
-                //           ),
-                //         ]
-                //     ),
-                //   ),
-                // ),
                 GestureDetector(
                   onTap: () {
                     setState(() {
@@ -458,18 +551,16 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                         height: 30,
                         margin: EdgeInsets.only(right: 8),
                         decoration: BoxDecoration(
-                            color: isMale
-                                ? Colors.transparent
-                                : Palette.textColor2,
+                            color: Colors.transparent,
                             border: Border.all(
                                 width: 1,
                                 color: isMale
-                                    ? Palette.textColor1
-                                    : Colors.transparent),
+                                    ? Colors.transparent
+                                    : Color(0xFF66FCF1)),
                             borderRadius: BorderRadius.circular(15)),
                         child: Icon(
                           MaterialCommunityIcons.account_outline,
-                          color: isMale ? Palette.iconColor : Colors.white,
+                          color: isMale ? Palette.iconColor : Color(0xFF66FCF1),
                         ),
                       ),
                       Text(
@@ -492,9 +583,8 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                   style: TextStyle(color: Palette.textColor2),
                   children: [
                     TextSpan(
-                      //recognizer: ,
                       text: "term & conditions",
-                      style: TextStyle(color: Colors.orange),
+                      style: TextStyle(color: Color(0xFF66FCF1)),
                     ),
                   ]),
             ),
@@ -535,16 +625,14 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
     return AnimatedPositioned(
       duration: Duration(milliseconds: 400),
       curve: Curves.bounceInOut,
-      top: isSignupScreen ? 420 : 330,
+      top: isSignupScreen ? 450 : 350,
       right: 0,
       left: 0,
       child: Center(
         child: GestureDetector(
-          onTap: () {
-            String userName = userNameController.text;
-            String email = emailController.text;
-            String password = passwordController.text;
-            RegExp regexForEmail = RegExp(r'^[a-zA-Z0-9]+@gmail.com$');
+          onTap: () async {
+            userName = userNameController.text;
+            password = passwordController.text;
             RegExp regexForLowerCase = RegExp(r'[a-z]+');
             RegExp regexForUpperCase = RegExp(r'[A-Z]+');
             RegExp regexForNumber = RegExp(r'[0-9]+');
@@ -552,75 +640,317 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                 regexForLowerCase.hasMatch(password) &&
                 regexForUpperCase.hasMatch(password) &&
                 regexForNumber.hasMatch(password);
-            // bool validEmail = regexForEmail.hasMatch(email);
-            // // !!!!!!!!!!!!! MUST MOVE THIS PART TO ELSE BEFORE MERGE !!!!!!!!!!!!!
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage()),
-            );
-            // welcomePage replaced with HomePage
-            // // !!!!!!!!!!!!! MUST MOVE THIS PART TO ELSE BEFORE MERGE !!!!!!!!!!!!!
-            if (userName.isEmpty || email.isEmpty || password.isEmpty) {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text("Error"),
-                      content: Text("Please fill all the fields"),
-                      actions: [
-                        FlatButton(
-                          child: Text("Ok"),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                        )
+            if (!isSignupScreen) {
+              if (userName.isEmpty || password.isEmpty) {
+                // showDialog(
+                //   context: context,
+                //   builder: (context) => AlertDialog(
+                //     title: Text("Error"),
+                //     content: Text("Please fill all the fields"),
+                //     actions: [
+                //       FlatButton(
+                //         child: Text("OK"),
+                //         onPressed: () {
+                //           Navigator.pop(context);
+                //         },
+                //       )
+                //     ],
+                //   ),
+                // );
+                return Dialog(
+                  backgroundColor: Colors.black87,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(60.0)),
+                  child: Container(
+                    height: 350,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          height: 10,
+                        ),
+                        CircleAvatar(
+                          backgroundColor: Colors.transparent,
+                          backgroundImage: AssetImage('assets/images/Rick.png'),
+                          radius: 70,
+                        ),
+                        Text(
+                          "Password must be atleast 8 characters long and must contain atleast one lowercase letter, one uppercase letter and one number",
+                          style: TextStyle(
+                            fontFamily: 'Gotham',
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Container(
+                              height: 30,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                border: Border.all(
+                                    color:
+                                    Color.fromARGB(255, 10, 203, 174),
+                                    width: 1),
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(80)),
+                              ),
+                              child: Text("  Got it!",
+                                  style: TextStyle(
+                                      fontFamily: 'Gotham',
+                                      fontSize: 20,
+                                      color: Color.fromARGB(
+                                          255, 10, 203, 174))),
+                            )),
+                        Container(height: 10)
                       ],
-                    );
-                  });
-            } else if (!validPassword) {
-              showDialog(
+                    ),
+                  ),
+                );
+              } else if (!validPassword) {
+                showDialog(
                   context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text("Error"),
-                      content: Text(
-                          "Password must contain atleast one lowercase, one uppercase, one number and atleast 8 characters"),
-                      actions: [
-                        FlatButton(
-                          child: Text("Ok"),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                        )
+                  builder: (context) =>
+                  //     AlertDialog(
+                  //   title: Text("Error"),
+                  //   content: Text(
+                  //       "Password must be atleast 8 characters long and must contain atleast one lowercase letter, one uppercase letter and one number"),
+                  //   actions: [
+                  //     FlatButton(
+                  //       child: Text("OK"),
+                  //       onPressed: () {
+                  //         Navigator.pop(context);
+                  //       },
+                  //     )
+                  //   ],
+                  // ),
+                  Dialog(
+                  backgroundColor: Colors.black87,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(60.0)),
+                  child: Container(
+                    height: 350,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          height: 10,
+                        ),
+                        CircleAvatar(
+                          backgroundColor: Colors.transparent,
+                          backgroundImage: AssetImage('assets/images/Rick.png'),
+                          radius: 70,
+                        ),
+                        Text(
+                          "Password must be atleast 8 characters long and must contain atleast one lowercase letter, one uppercase letter and one number",
+                          style: TextStyle(
+                            fontFamily: 'Gotham',
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Container(
+                              height: 30,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                border: Border.all(
+                                    color:
+                                    Color.fromARGB(255, 10, 203, 174),
+                                    width: 1),
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(80)),
+                              ),
+                              child: Text("  Got it!",
+                                  style: TextStyle(
+                                      fontFamily: 'Gotham',
+                                      fontSize: 20,
+                                      color: Color.fromARGB(
+                                          255, 10, 203, 174))),
+                            )),
+                        Container(height: 10)
                       ],
-                    );
-                  });
-            } else if (!regexForEmail.hasMatch(email)) {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text("Error"),
-                      content: Text("Please enter a valid email"),
-                      actions: [
-                        FlatButton(
-                          child: Text("Ok"),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                        )
-                      ],
-                    );
-                  });
+                    ),
+                  ),
+                )
+                );
+              } else {
+                bool validUserPassword = await sendMessage(isSignupScreen);
+              }
             } else {
-              user = User(userName, email, password, isMale);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => HomePage(
-                          user: user,
-                        )),
-              );
+              email = emailController.text;
+              RegExp regexForEmail = RegExp(r'^[a-zA-Z0-9]+@gmail.com$');
+              if (userName.isEmpty || email.isEmpty || password.isEmpty) {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return
+                      //   AlertDialog(
+                      //   title: Text("Error"),
+                      //   content: Text("Please fill all the fields"),
+                      //   actions: [
+                      //     FlatButton(
+                      //       child: Text("Ok"),
+                      //       onPressed: () {
+                      //         Navigator.pop(context);
+                      //       },
+                      //     )
+                      //   ],
+                      // );
+                        Dialog(
+                          backgroundColor: Colors.black87,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(60.0)),
+                          child: Container(
+                            height: 350,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  height: 10,
+                                ),
+                                CircleAvatar(
+                                  backgroundColor: Colors.transparent,
+                                  backgroundImage: AssetImage('assets/images/Rick.png'),
+                                  radius: 70,
+                                ),
+                                Text(
+                                  "Please fill all the fields",
+                                  style: TextStyle(
+                                    fontFamily: 'Gotham',
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Container(
+                                      height: 30,
+                                      width: 50,
+                                      decoration: BoxDecoration(
+                                        color: Colors.transparent,
+                                        border: Border.all(
+                                            color:
+                                            Color.fromARGB(255, 10, 203, 174),
+                                            width: 1),
+                                        borderRadius:
+                                        BorderRadius.all(Radius.circular(80)),
+                                      ),
+                                      child: Text(" Ok",
+                                          style: TextStyle(
+                                              fontFamily: 'Gotham',
+                                              fontSize: 20,
+                                              color: Color.fromARGB(
+                                                  255, 10, 203, 174))),
+                                    )),
+                                Container(height: 10)
+                              ],
+                            ),
+                          ),
+                        );
+                    });
+              } else if (!validPassword) {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return Dialog(
+                        backgroundColor: Colors.black87,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(60.0)),
+                        child: Container(
+                          height: 350,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                height: 10,
+                              ),
+                              CircleAvatar(
+                                backgroundColor: Colors.transparent,
+                                backgroundImage: AssetImage(
+                                    'assets/images/Rick.png'),
+                                radius: 70,
+                              ),
+                              Text(
+                                "Password must be atleast 8 characters long and must contain atleast one lowercase letter, one uppercase letter and one number",
+                                style: TextStyle(
+                                  fontFamily: 'Gotham',
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Container(
+                                    height: 30,
+                                    width: 100,
+                                    decoration: BoxDecoration(
+                                      color: Colors.transparent,
+                                      border: Border.all(
+                                          color:
+                                          Color.fromARGB(255, 10, 203, 174),
+                                          width: 1),
+                                      borderRadius:
+                                      BorderRadius.all(Radius.circular(80)),
+                                    ),
+                                    child: Text("  Got it!",
+                                        style: TextStyle(
+                                            fontFamily: 'Gotham',
+                                            fontSize: 20,
+                                            color: Color.fromARGB(
+                                                255, 10, 203, 174))),
+                                  )),
+                              Container(height: 10)
+                            ],
+                          ),
+                        ),
+                      );
+                    });
+                    //     AlertDialog(
+                    //     title: Text("Error"),
+                    //     content: Text(
+                    //         "Password must contain atleast one lowercase, one uppercase, one number and atleast 8 characters"),
+                    //     actions: [
+                    //       FlatButton(
+                    //         child: Text("Ok"),
+                    //         onPressed: () {
+                    //           Navigator.pop(context);
+                    //         },
+                    //       )
+                    //     ],
+                    //   );
+                    // });
+              } else if (!regexForEmail.hasMatch(email)) {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text("Error"),
+                        content: Text("Please enter a valid email"),
+                        actions: [
+                          FlatButton(
+                            child: Text("Ok"),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          )
+                        ],
+                      );
+                    });
+              } else {
+                isValidInDataBase = await sendMessage(isSignupScreen);
+              }
             }
           },
           child: Container(
@@ -628,7 +958,7 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
             width: 90,
             padding: EdgeInsets.all(15),
             decoration: BoxDecoration(
-                color: Colors.white,
+                color: Color(0xFF1F2833).withOpacity(.85),
                 borderRadius: BorderRadius.circular(50),
                 boxShadow: [
                   if (showShadow)
@@ -642,10 +972,15 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
                 ? Container(
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
-                            // colors: [Colors.orange[200], Colors.red[400]],
-                            colors: [Colors.orange, Colors.red],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight),
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Color(0xFFdce3e2),
+                            Color(0xFF0ffceb),
+                            Color(0xFF30e3d6),
+                            Color(0xFF1F2833),
+                          ],
+                        ),
                         borderRadius: BorderRadius.circular(30),
                         boxShadow: [
                           BoxShadow(
@@ -693,26 +1028,93 @@ class LoginSignupScreenState extends State<LoginSignupScreen> {
       ),
     );
   }
+
+  Future<bool> sendMessage(bool isSignup) async {
+    if (!isSignup) {
+      await Socket.connect(MyApp.ip, 8080).then((serverSocket) {
+        serverSocket.write("signIn-" +
+            userNameController.text +
+            "-" +
+            passwordController.text +
+            ";");
+        serverSocket.flush();
+        serverSocket.listen((data) {
+          // print("Received: " + String.fromCharCodes(data));
+          if (String.fromCharCodes(data) == "true") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomePage(
+                  user: User(userName, "mahan@gmail.com", password, true),
+                ),
+              ),
+            );
+            return true;
+          }
+          else {
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: Text("Error"),
+                content: Text("Invalid user name or password"),
+                actions: [
+                  FlatButton(
+                    child: Text("OK"),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  )
+                ],
+              ),
+            );
+            return false;
+          }
+        });
+      });
+    } else {
+      await Socket.connect(MyApp.ip, 8080).then((serverSocket) {
+        serverSocket.write("signUp-" +
+            userNameController.text +
+            "-" +
+            passwordController.text +
+            "-" +
+            emailController.text +
+            "-" +
+            isMale.toString() +
+            ";");
+        serverSocket.flush();
+        serverSocket.listen((data) {
+          print("Received: " + String.fromCharCodes(data));
+          if (String.fromCharCodes(data) == "true") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomePage(
+                    user: User(userNameController.text, emailController.text,
+                        passwordController.text, isMale)),
+              ),
+            );
+            return true;
+          } else {
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: Text("Error"),
+                content: Text("User already exists"),
+                actions: [
+                  FlatButton(
+                    child: Text("OK"),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  )
+                ],
+              ),
+            );
+            return false;
+          }
+        });
+      });
+    }
+  }
 }
-
-void showButtomToast() => Fluttertoast.showToast(
-    msg: "This is Center Short Toast",
-    toastLength: Toast.LENGTH_SHORT,
-    gravity: ToastGravity.CENTER,
-    timeInSecForIosWeb: 2,
-    backgroundColor: Colors.red,
-    textColor: Colors.white,
-    fontSize: 16.0);
-
-// void showButtomToast() {
-//   Fluttertoast.showToast(
-//       msg: "Please fill all the fields correctly!",
-//
-//       // toastLength: Toast.LENGTH_SHORT,
-//       // gravity: ToastGravity.BOTTOM,
-//       // timeInSecForIosWeb: 5,
-//       // backgroundColor: Colors.red,
-//       // textColor: Colors.black,
-//       // fontSize: 16.0
-//   );
-// }

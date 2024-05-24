@@ -28,8 +28,11 @@ class _ShowMembersState extends State<ShowMembers> {
         itemBuilder: (context, index) {
           return Column(
             children: [
+              SizedBox(
+                height: 5,
+              ),
               Container(
-                margin: EdgeInsets.only(top: 20, bottom: 10),
+                // margin: EdgeInsets.only(top: 20),
                 child: CircleAvatar(
                     radius: 50,
                     backgroundImage: AssetImage("assets/images/Avatar2.png")),

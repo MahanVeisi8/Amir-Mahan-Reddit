@@ -1,5 +1,6 @@
 import 'package:Amir_Mahan_Reddit/Screens/AddPost.dart';
 import 'package:Amir_Mahan_Reddit/Screens/CommunitiesPage.dart';
+import 'package:Amir_Mahan_Reddit/Screens/OnSidebar/EditProfile.dart';
 import 'package:Amir_Mahan_Reddit/Screens/OnSidebar/ProfilePage.dart';
 import 'package:Amir_Mahan_Reddit/Screens/PostPage.dart';
 import 'package:Amir_Mahan_Reddit/Splash/SplashScreen.dart';
@@ -15,8 +16,8 @@ import '../BasicClasses/Comment.dart';
 import '../BasicClasses/Community.dart';
 
 class LoadPage extends StatefulWidget {
-  const LoadPage({Key key}) : super(key: key);
-
+  const LoadPage({Key key, this.user}) : super(key: key);
+  final User user;
   @override
   State<LoadPage> createState() => _LoadPageState();
 }
@@ -36,215 +37,333 @@ class _LoadPageState extends State<LoadPage> {
           ),
         ),
         automaticallyImplyLeading: true,
-        backgroundColor: Color(0xFF1F2833),
+        backgroundColor: Colors.black87,
       ),
-      backgroundColor: Color(0xFF1F2833),
+      backgroundColor: Colors.black87,
       body: SafeArea(
-          child: SingleChildScrollView(
+        child: SingleChildScrollView(
             child: Container(
-              padding: EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 20,
+          padding: EdgeInsets.all(20),
+          child: Column(children: [
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.,
+              children: [
+                FlatButton(
+                  child: CircleAvatar(
+                    radius: MediaQuery.of(context).size.width * 0.11,
+                    backgroundImage: AssetImage('assets/images/morty.png'),
+                    backgroundColor: Colors.transparent,
                   ),
-                  Row(
-                    // mainAxisAlignment: MainAxisAlignment.,
-                    children: [
-                      FlatButton(
-                        child: CircleAvatar(
-                          radius: MediaQuery.of(context).size.width * 0.11,
-                          backgroundImage: AssetImage('assets/images/morty.png'),
-                          backgroundColor: Colors.transparent,
+                  onPressed: () {
+                    setState(() {
+                      loadAddress = "assets/images/morty.png";
+                      widget.user.profilePicture = "0";
+                    });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditProfile(
+                          user: widget.user,
                         ),
-                        onPressed: () {
-                          loadAddress = "assets/images/morty.png";
-                          Navigator.pop(context);
-                        },
                       ),
-                      FlatButton(
-                        child: CircleAvatar(
-                          radius: MediaQuery.of(context).size.width * 0.11,
-                          backgroundImage: AssetImage('assets/images/jerry.png'),
-                          backgroundColor: Colors.transparent,
-                        ),
-                        onPressed: () {
-                          loadAddress = "assets/images/jerry.png";
-                          Navigator.pop(context);
-                        },
-                      ),
-                      FlatButton(
-                        child: CircleAvatar(
-                          radius: MediaQuery.of(context).size.width * 0.11,
-                          backgroundImage: AssetImage('assets/images/Jessica.png'),
-                          backgroundColor: Colors.transparent,
-                        ),
-                        onPressed: () {
-                          loadAddress = "assets/images/Jessica.png";
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ],
+                    );
+                  },
+                ),
+                FlatButton(
+                  child: CircleAvatar(
+                    radius: MediaQuery.of(context).size.width * 0.11,
+                    backgroundImage: AssetImage('assets/images/jerry.png'),
+                    backgroundColor: Colors.transparent,
                   ),
-                  SizedBox(
-                    height: 20,
+                  onPressed: () {
+                    setState(() {
+                      loadAddress = "assets/images/jerry.png";
+                      widget.user.profilePicture = "1";
+                    });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditProfile(
+                          user: widget.user,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                FlatButton(
+                  child: CircleAvatar(
+                    radius: MediaQuery.of(context).size.width * 0.11,
+                    backgroundImage: AssetImage('assets/images/Jessica.png'),
+                    backgroundColor: Colors.transparent,
                   ),
-                  Row(
-                    children: [
-                      FlatButton(
-                        child: CircleAvatar(
-                          radius: MediaQuery.of(context).size.width * 0.11,
-                          backgroundImage: AssetImage('assets/images/Beth.png'),
-                          backgroundColor: Colors.transparent,
+                  onPressed: () {
+                    setState(() {
+                      loadAddress = "assets/images/Jessica.png";
+                      widget.user.profilePicture = "2";
+                    });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditProfile(
+                          user: widget.user,
                         ),
-                        onPressed: () {
-                          loadAddress = "assets/images/Beth.png";
-                          Navigator.pop(context);
-                        },
                       ),
-                      FlatButton(
-                        child: CircleAvatar(
-                          radius: MediaQuery.of(context).size.width * 0.11,
-                          backgroundImage: AssetImage('assets/images/summer.png'),
-                          backgroundColor: Colors.transparent,
-                        ),
-                        onPressed: () {
-                          loadAddress = "assets/images/summer.png";
-                          Navigator.pop(context);
-                        },
-                      ),
-                      FlatButton(
-                        child: CircleAvatar(
-                          radius: MediaQuery.of(context).size.width * 0.11,
-                          backgroundImage: AssetImage('assets/images/Doofus_Rick.png'),
-                          backgroundColor: Colors.transparent,
-                        ),
-                        onPressed: () {
-                          loadAddress = "assets/images/Doofus_Rick.png";
-                          Navigator.pop(context);
-                        },
-                      ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  FlatButton(
+                    );
+                  },
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                FlatButton(
                     child: CircleAvatar(
                       radius: MediaQuery.of(context).size.width * 0.11,
-                      backgroundImage: AssetImage('assets/images/Lawnmower_dog.png'),
+                      backgroundImage: AssetImage('assets/images/Beth.png'),
                       backgroundColor: Colors.transparent,
                     ),
                     onPressed: () {
+                      setState(() {
+                        loadAddress = "assets/images/Beth.png";
+                        widget.user.profilePicture = "3";
+                      });
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EditProfile(
+                            user: widget.user,
+                          ),
+                        ),
+                      );
+                    }),
+                FlatButton(
+                  child: CircleAvatar(
+                    radius: MediaQuery.of(context).size.width * 0.11,
+                    backgroundImage: AssetImage('assets/images/summer.png'),
+                    backgroundColor: Colors.transparent,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      loadAddress = "assets/images/summer.png";
+                      widget.user.profilePicture = "4";
+                    });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditProfile(
+                          user: widget.user,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                FlatButton(
+                  child: CircleAvatar(
+                    radius: MediaQuery.of(context).size.width * 0.11,
+                    backgroundImage:
+                        AssetImage('assets/images/Doofus_Rick.png'),
+                    backgroundColor: Colors.transparent,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      loadAddress = "assets/images/Doofus_Rick.png";
+                      widget.user.profilePicture = "5";
+                    });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditProfile(
+                          user: widget.user,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                FlatButton(
+                  child: CircleAvatar(
+                    radius: MediaQuery.of(context).size.width * 0.11,
+                    backgroundImage:
+                        AssetImage('assets/images/Lawnmower_dog.png'),
+                    backgroundColor: Colors.transparent,
+                  ),
+                  onPressed: () {
+                    setState(() {
                       loadAddress = "assets/images/Lawnmower_dog.png";
-                      Navigator.pop(context);
-                    },
+                      widget.user.profilePicture = "6";
+                    });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditProfile(
+                          user: widget.user,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                FlatButton(
+                  child: CircleAvatar(
+                    radius: MediaQuery.of(context).size.width * 0.11,
+                    backgroundImage: AssetImage('assets/images/Avatar2.png'),
+                    backgroundColor: Colors.transparent,
                   ),
-                  FlatButton(
-                    child: CircleAvatar(
-                      radius: MediaQuery.of(context).size.width * 0.11,
-                      backgroundImage: AssetImage('assets/images/Avatar2.png'),
-                      backgroundColor: Colors.transparent,
-                    ),
-                    onPressed: () {
+                  onPressed: () {
+                    setState(() {
                       loadAddress = "assets/images/Avatar2.png";
-                      Navigator.pop(context);
-                    },
+                      widget.user.profilePicture = "7";
+                    });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditProfile(
+                          user: widget.user,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                FlatButton(
+                  child: CircleAvatar(
+                    radius: MediaQuery.of(context).size.width * 0.11,
+                    backgroundImage: AssetImage('assets/images/Avatar.png'),
+                    backgroundColor: Colors.transparent,
                   ),
-                  FlatButton(
-                    child: CircleAvatar(
-                      radius: MediaQuery.of(context).size.width * 0.11,
-                      backgroundImage: AssetImage('assets/images/Avatar.png'),
-                      backgroundColor: Colors.transparent,
-                    ),
-                    onPressed: () {
+                  onPressed: () {
+                    setState(() {
                       loadAddress = "assets/images/Avatar.png";
-                      Navigator.pop(context);
-                    },
+                      widget.user.profilePicture = "8";
+                    });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditProfile(
+                          user: widget.user,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                FlatButton(
+                  child: CircleAvatar(
+                    radius: MediaQuery.of(context).size.width * 0.11,
+                    backgroundImage: AssetImage('assets/images/Squanchy.png'),
+                    backgroundColor: Colors.transparent,
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  FlatButton(
-                    child: CircleAvatar(
-                      radius: MediaQuery.of(context).size.width * 0.11,
-                      backgroundImage: AssetImage('assets/images/Squanchy.png'),
-                      backgroundColor: Colors.transparent,
-                    ),
-                    onPressed: () {
+                  onPressed: () {
+                    setState(() {
                       loadAddress = "assets/images/Squanchy.png";
-                      Navigator.pop(context);
-                    },
+                      widget.user.profilePicture = "9";
+                    });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditProfile(
+                          user: widget.user,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                FlatButton(
+                  child: CircleAvatar(
+                    radius: MediaQuery.of(context).size.width * 0.11,
+                    backgroundImage: AssetImage('assets/images/Rick.png'),
+                    backgroundColor: Colors.transparent,
                   ),
-                  FlatButton(
-                    child: CircleAvatar(
-                      radius: MediaQuery.of(context).size.width * 0.11,
-                      backgroundImage: AssetImage('assets/images/Rick.png'),
-                      backgroundColor: Colors.transparent,
-                    ),
-                    onPressed: () {
+                  onPressed: () {
+                    setState(() {
                       loadAddress = "assets/images/Rick.png";
-                      Navigator.pop(context);
-                    },
+                      widget.user.profilePicture = "10";
+                    });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditProfile(
+                          user: widget.user,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                FlatButton(
+                  child: CircleAvatar(
+                    radius: MediaQuery.of(context).size.width * 0.11,
+                    backgroundImage: AssetImage('assets/images/Evil_Morty.png'),
+                    backgroundColor: Colors.transparent,
                   ),
-                  FlatButton(
-                    child: CircleAvatar(
-                      radius: MediaQuery.of(context).size.width * 0.11,
-                      backgroundImage: AssetImage('assets/images/Evil_Morty.png'),
-                      backgroundColor: Colors.transparent,
-                    ),
-                    onPressed: () {
+                  onPressed: () {
+                    setState(() {
                       loadAddress = "assets/images/Evil_Morty.png";
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 100,
-              ),
-               FlatButton(
-                   onPressed: () {
-                     Navigator.pop(context);
-                   },
-                   child: Text(
-                     'Choose from Gallery',
-                     style: TextStyle(
-                       fontFamily: 'Gotham',
-                       fontWeight: FontWeight.bold,
-                       fontSize: 20,
-                       color: Color(0xFF66FCF1),
-                     ),
-                   ),
-               ),
-              // SizedBox(
-              //   height: 10,
-              // ),
-              FlatButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  'Cancel',
-                  style: TextStyle(
-                    fontFamily: 'Gotham',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: Colors.white,
-                  ),
+                      widget.user.profilePicture = "11";
+                    });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditProfile(
+                          user: widget.user,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 100,
+            ),
+            FlatButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                'Choose from Gallery',
+                style: TextStyle(
+                  fontFamily: 'Gotham',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Color(0xFF66FCF1),
                 ),
               ),
-             ]
             ),
-      )
+            // SizedBox(
+            //   height: 10,
+            // ),
+            FlatButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                'Cancel',
+                style: TextStyle(
+                  fontFamily: 'Gotham',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ]),
+        )),
       ),
-    ),
     );
   }
 }

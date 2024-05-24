@@ -14,14 +14,24 @@ import '../BasicClasses/Comment.dart';
 import '../BasicClasses/Community.dart';
 
 class AddPost extends StatefulWidget {
+<<<<<<< HEAD
+  const AddPost({Key key, this.username}) : super(key: key);
+  final String loadAddress = "";
+  final String username;
+=======
   const AddPost({Key key}) : super(key: key);
   final String loadAddress = "";
+>>>>>>> 682bb7f95939602df98310957a67d0a75a816a3d
   @override
   State<AddPost> createState() => _AddPostState();
 }
 
 class _AddPostState extends State<AddPost> {
   int TypeOfPost = 0;
+  String title;
+  String describtion;
+  TextEditingController titleController = TextEditingController();
+  TextEditingController describtionController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,12 +64,27 @@ class _AddPostState extends State<AddPost> {
                     ),
                   ),
                   onPressed: () {
+<<<<<<< HEAD
+                    title = titleController.text;
+                    describtion = describtionController.text;
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AddPost2(
+                          username: widget.username,
+                          title: title,
+                          description: describtion,
+                        ),
+                        ),
+                      );
+=======
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => AddPost2(),
                       ),
                     );
+>>>>>>> 682bb7f95939602df98310957a67d0a75a816a3d
                   }),
             )
           ],
@@ -102,6 +127,132 @@ class _AddPostState extends State<AddPost> {
                                 color: Colors.white,
                                 fontFamily: 'Gotham',
                               ),
+<<<<<<< HEAD
+                            ),
+                            controller: titleController,
+                          ),
+                        ),
+                        SingleChildScrollView(
+                          child: Container(
+                            padding: EdgeInsets.only(
+                              left: MediaQuery.of(context).size.width * 0.08,
+                              right: MediaQuery.of(context).size.width * 0.08,
+                            ),
+                            child: TypeOfPost == 0
+                                ? Container()
+                                : TypeOfPost == 1
+                                    ? TextField(
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Gotham',
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.04,
+                                        ),
+                                        maxLines: null,
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          labelText: "Description",
+                                          labelStyle: TextStyle(
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.06,
+                                            color: Color(0xFFC5C6C7),
+                                            fontFamily: 'Gotham',
+                                          ),
+                                        ),
+                                        controller: describtionController,
+                                      )
+                                    : TypeOfPost == 2
+                                        ? Container(
+                                            padding: EdgeInsets.only(
+                                                left: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.08,
+                                                right: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.08,
+                                                top: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.025),
+                                            child: FlatButton(
+                                              onPressed: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        LoadPage(),
+                                                  ),
+                                                );
+                                              },
+                                              child: Text(
+                                                "Select Image",
+                                                style: TextStyle(
+                                                  color: Color(0xFF66FCF1),
+                                                  fontFamily: 'Gotham',
+                                                  fontSize:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          0.06,
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        : Container(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SingleChildScrollView(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width * 0.08),
+                    child: Column(
+                      children: [
+                        FlatButton(
+                          color: Color(0xFF233142),
+                          onPressed: () {
+                            setState(() {
+                              TypeOfPost = 1;
+                            });
+                          },
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 0.03,
+                            width: MediaQuery.of(context).size.width * 0.9,
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: AssetImage('assets/images/text.png'),
+                                ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.02,
+                                ),
+                                Text(
+                                  "Text",
+                                  style: TextStyle(
+                                    color: TypeOfPost == 1
+                                        ? Colors.white
+                                        : Colors.white.withOpacity(0.5),
+                                    fontFamily: 'Gotham',
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.06,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+=======
                             ),
                           ),
                         ),
@@ -224,6 +375,7 @@ class _AddPostState extends State<AddPost> {
                             ),
                           ),
                         ),
+>>>>>>> 682bb7f95939602df98310957a67d0a75a816a3d
                         FlatButton(
                           color: Color(0xFF233142),
                           onPressed: () {

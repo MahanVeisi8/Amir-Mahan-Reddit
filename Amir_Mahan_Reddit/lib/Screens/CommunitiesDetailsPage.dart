@@ -1,28 +1,60 @@
+import 'dart:io';
+
 import 'package:Amir_Mahan_Reddit/Screens/HomePage.dart';
 import 'package:Amir_Mahan_Reddit/Screens/ProfilePage.dart';
 import 'package:Amir_Mahan_Reddit/Screens/ShowCommunityPosts.dart';
 import 'package:Amir_Mahan_Reddit/Screens/ShowMembers.dart';
+import 'package:Amir_Mahan_Reddit/Widgets/AnimationRoute.dart';
+import 'package:Amir_Mahan_Reddit/main.dart';
 import 'package:flutter/material.dart';
 import 'package:Amir_Mahan_Reddit/BasicClasses/Community.dart';
+import 'package:Amir_Mahan_Reddit/Screens/CommunitiesPage.dart';
+import '../BasicClasses/Users.dart';
+import 'AddCommunity.dart';
 
 class CommunitiesDetailsPage extends StatefulWidget {
-  const CommunitiesDetailsPage({Key key, this.community}) : super(key: key);
+  const CommunitiesDetailsPage({Key key, this.community, this.username})
+      : super(key: key);
   final Community community;
-
+  final String username;
   @override
   State<CommunitiesDetailsPage> createState() => _CommunitiesDetailsPageState();
 }
 
 class _CommunitiesDetailsPageState extends State<CommunitiesDetailsPage> {
+  bool isFollowed = true;
   bool showPosts = true;
+  bool first = true;
   void changeShowPosts() {
     setState(() {
       showPosts = !showPosts;
     });
   }
 
+  void changeIsFollowed() {
+    setState(() {
+      isFollowed = !isFollowed;
+    });
+  }
+
+  void setIsFollowed() {
+    if (first) {
+      first = false;
+      if (widget.community.getMemberUsernames().contains(widget.username)) {
+        setState(() {
+          isFollowed = true;
+        });
+      } else {
+        setState(() {
+          isFollowed = false;
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    setIsFollowed();
     return Scaffold(
         backgroundColor: Colors.black87,
         body: Column(
@@ -34,7 +66,7 @@ class _CommunitiesDetailsPageState extends State<CommunitiesDetailsPage> {
                       context,
                       PageRouteBuilder(
                         pageBuilder: (c, a1, a2) => ProfilePage(
-                          image: 'assets/images/AlliSherlock.jpg',
+                          image: 'assets/images/communityProf/1.png',
                         ),
                         transitionsBuilder: (c, anim, a2, child) =>
                             FadeTransition(opacity: anim, child: child),
@@ -47,7 +79,7 @@ class _CommunitiesDetailsPageState extends State<CommunitiesDetailsPage> {
                     height: MediaQuery.of(context).size.width * 0.5,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                      image: AssetImage('assets/images/AlliSherlock.jpg'),
+                      image: AssetImage('assets/images/communityProf/1.png'),
                       fit: BoxFit.cover,
                     )),
                   ))),
@@ -86,7 +118,7 @@ class _CommunitiesDetailsPageState extends State<CommunitiesDetailsPage> {
                       context,
                       PageRouteBuilder(
                         pageBuilder: (c, a1, a2) => ProfilePage(
-                          image: 'assets/images/AlliSherlock.jpg',
+                          image: 'assets/images/communityProf/1.png',
                         ),
                         transitionsBuilder: (c, anim, a2, child) =>
                             FadeTransition(opacity: anim, child: child),
@@ -99,8 +131,9 @@ class _CommunitiesDetailsPageState extends State<CommunitiesDetailsPage> {
                         top: MediaQuery.of(context).size.width * 0.4, left: 22),
                     child: CircleAvatar(
                       radius: MediaQuery.of(context).size.width * 0.09,
+                      backgroundColor: Colors.transparent,
                       backgroundImage:
-                          AssetImage('assets/images/AlliSherlock.jpg'),
+                          AssetImage('assets/images/communityProf/1.png'),
                     ),
                   ))),
               Container(
@@ -131,22 +164,35 @@ class _CommunitiesDetailsPageState extends State<CommunitiesDetailsPage> {
                 ),
               ),
               Container(
+                  width: MediaQuery.of(context).size.width * 0.28,
                   decoration: BoxDecoration(
                     color: Colors.transparent,
                     border: Border.all(
                         color: Color.fromARGB(255, 10, 203, 174), width: 1),
-                    borderRadius: BorderRadius.all(Radius.circular(22)),
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
                   ),
                   margin: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width * 0.8, top: 35),
+                      left: MediaQuery.of(context).size.width * 0.7, top: 35),
                   child: GestureDetector(
+                    onTap: () async {
+                      setState(() {
+                        isFollowed = !isFollowed;
+                      });
+                      await followOrUnfollow(isFollowed);
+                      Navigator.of(context).push(createRoute(
+                          CommunitiesPage(
+                            username: widget.username,
+                          ),
+                          1));
+                    },
+
                     child: Container(
-                      child: Text("Follow",
+                      child: Text(isFollowed ? "unfollow" : "follow",
                           style: TextStyle(
                               fontFamily: 'Gotham',
                               fontWeight: FontWeight.w700,
                               fontSize: 18,
-                              color: Colors.white70)),
+                              color: Color.fromARGB(236, 27, 241, 234))),
                       margin: EdgeInsets.only(
                           left: 10, right: 10, top: 10, bottom: 10),
                     ),
@@ -299,16 +345,32 @@ class _CommunitiesDetailsPageState extends State<CommunitiesDetailsPage> {
                                       ],
                                     ),
                                     GestureDetector(
-                                      onTap: () {},
+                                      onTap: () {
+                                        setState(() {
+                                          widget.community
+                                              .getPosts()[index]
+                                              .isSaved =
+                                          !widget.community
+                                              .getPosts()[index]
+                                              .isSaved;
+                                        });
+                                      },
                                       child: Container(
-                                        margin: EdgeInsets.only(right: 12),
-                                        child: Icon(
-                                          Icons.bookmark_border_outlined,
-                                          size: 30,
-                                          color: Color.fromARGB(
-                                              189, 255, 255, 255),
-                                        ),
-                                      ),
+                                          margin: EdgeInsets.only(right: 12),
+                                          child: (widget.community
+                                              .getPosts()[index]
+                                              .isSaved)
+                                              ? Icon(Icons.bookmark,
+                                              size: 30,
+                                              color: Color.fromARGB(
+                                                  189, 255, 255, 255))
+                                              : Icon(
+                                            Icons
+                                                .bookmark_border_outlined,
+                                            size: 30,
+                                            color: Color.fromARGB(
+                                                189, 255, 255, 255),
+                                          )),
                                     ),
                                   ],
                                 ),
@@ -583,10 +645,74 @@ class _CommunitiesDetailsPageState extends State<CommunitiesDetailsPage> {
                               color: Colors.black45,
                               height: 1,
                               width: MediaQuery.of(context).size.width * 0.9,
-                            )
+                            ),
                           ],
                         );
                     })),
+            Container(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (c, a1, a2) => AddCommunity(),
+                        transitionsBuilder: (c, anim, a2, child) =>
+                            FadeTransition(opacity: anim, child: child),
+                        transitionDuration: Duration(milliseconds: 200),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    "  Edit Community",
+                    style: TextStyle(
+                        fontFamily: 'Gotham',
+                        fontSize: 20,
+                        color: Color.fromARGB(255, 26, 198, 255)),
+                  ),
+                ),
+                Container(height: 1, width: 1)
+              ],
+            ),
+            Container(
+              height: 20,
+            ),
+            Container(
+              color: Colors.black45,
+              height: 1,
+            ),
+            Container(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    // Deleting Implemantation
+                  },
+                  child: Text(
+                    "  Delete Community",
+                    style: TextStyle(
+                        fontFamily: 'Gotham',
+                        fontSize: 20,
+                        color: Color.fromARGB(255, 255, 26, 64)),
+                  ),
+                ),
+                Container(height: 1, width: 1)
+              ],
+            ),
+            Container(
+              height: 20,
+            ),
+            Container(
+              color: Colors.black45,
+              height: 1,
+            ),
           ],
         ),
         bottomNavigationBar: BottomAppBar(
@@ -627,5 +753,34 @@ class _CommunitiesDetailsPageState extends State<CommunitiesDetailsPage> {
                 ),
               ])),
         ));
+  }
+
+  Future<void> followOrUnfollow(bool hasFollowed) async {
+    var listen1;
+    if (hasFollowed) {
+      await Socket.connect(MyApp.ip, MyApp.port).then((ServerSocket) async {
+        ServerSocket.write(
+          "Follow-${widget.community.name}-${widget.username};",
+        );
+        await ServerSocket.flush();
+        print("sent");
+        listen1 = ServerSocket.listen((data) {
+          print(String.fromCharCodes(data));
+        });
+      });
+      await listen1.asFuture<void>();
+    } else {
+      await Socket.connect(MyApp.ip, MyApp.port).then((ServerSocket) async {
+        ServerSocket.write(
+          "Unfollow-${widget.community.name}-${widget.username};",
+        );
+        await ServerSocket.flush();
+        print("sent");
+        listen1 = ServerSocket.listen((data) {
+          print(String.fromCharCodes(data));
+        });
+      });
+      await listen1.asFuture<void>();
+    }
   }
 }

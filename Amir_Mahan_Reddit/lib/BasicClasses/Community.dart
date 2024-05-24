@@ -9,7 +9,7 @@ class Community {
   int numMembers;
   String name;
   String description;
-  String ProfileImage;
+  int profileImage;
 
   Community(User admin, String name, String description) {
     this.admin = admin;
@@ -20,8 +20,24 @@ class Community {
     this.name = name;
     this.description = description;
   }
-  void setProfileImage(String image) {
-    this.ProfileImage = image;
+  void setProfileImage(int image) {
+    this.profileImage = image;
+  }
+
+  void setPosts(List<Post> posts) {
+    this.posts = posts;
+  }
+
+  List<String> getMemberUsernames() {
+    List<String> usernames = <String>[];
+    for (User member in members) {
+      usernames.add(member.username);
+    }
+    return usernames;
+  }
+
+  void setMembers(List<User> members) {
+    this.members = members;
   }
 
   void addMember(User member) {

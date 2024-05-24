@@ -3,6 +3,7 @@ import 'package:Amir_Mahan_Reddit/BasicClasses/Post.dart';
 
 class User {
   String username;
+  String name;
   List<Post> savedPosts;
   List<Post> likedPosts;
   List<Post> dislikedPosts;
@@ -12,6 +13,8 @@ class User {
   int numPosts;
   String createdAt;
   bool isMale;
+  String phoneNumber;
+  String profilePicture;
   User(String username, String email, String password, bool isMale) {
     this.username = username;
     this.savedPosts = <Post>[];
@@ -23,7 +26,11 @@ class User {
     this.likedPosts = <Post>[];
     this.dislikedPosts = <Post>[];
     this.favoriteCommunities = <Community>[];
+    this.phoneNumber = "no Phone number saved";
+    this.profilePicture = "4";
+    this.name = "Not named";
   }
+
   void addLike(Post likedPost) {
     this.likedPosts.add(likedPost);
   }
@@ -34,6 +41,14 @@ class User {
 
   void addSavedPost(Post savedPost) {
     this.savedPosts.add(savedPost);
+  }
+
+  void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+  }
+
+  String getPhoneNumber() {
+    return this.phoneNumber;
   }
 
   void addFavoriteCommunity(Community community) {
@@ -90,5 +105,33 @@ class User {
 
   List<Community> getFavoriteCommunities() {
     return favoriteCommunities;
+  }
+
+  String getProfilePicture() {
+    return profilePicture;
+  }
+
+  String getName() {
+    return name;
+  }
+
+  void setEmail(String email) {
+    this._email = email;
+  }
+
+  void setPassword(String password) {
+    this._password = password;
+  }
+
+  void setProfilePicture(String profilePicture) {
+    this.profilePicture = profilePicture;
+  }
+
+  void setName(String name) {
+    this.name = name;
+  }
+
+  void setUsername(String username) {
+    this.username = username;
   }
 }

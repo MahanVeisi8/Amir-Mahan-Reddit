@@ -5,8 +5,14 @@ import 'package:Amir_Mahan_Reddit/Screens/HomePage.dart';
 import 'package:flutter/material.dart';
 
 class NewPostOrCommunity extends StatefulWidget {
+<<<<<<< HEAD
+  const NewPostOrCommunity({Key key, this.username}) : super(key: key);
+
+  final String username;
+=======
   const NewPostOrCommunity({Key key}) : super(key: key);
 
+>>>>>>> 682bb7f95939602df98310957a67d0a75a816a3d
   @override
   State<NewPostOrCommunity> createState() => _NewPostOrCommunityState();
 }
@@ -18,6 +24,121 @@ class _NewPostOrCommunityState extends State<NewPostOrCommunity> {
       appBar: AppBar(
           backgroundColor: Colors.black87,
           title: Text(
+<<<<<<< HEAD
+            "New:",
+            style: TextStyle(fontFamily: 'Gotham'),
+          )),
+      body: Column(
+        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Container(
+            color: Colors.transparent,
+            height: 20,
+          ),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AddCommunity(
+                      username: widget.username,
+                    )));
+              },
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.92,
+                height: MediaQuery.of(context).size.width * 0.7,
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  border: Border.all(
+                      color: Color.fromARGB(255, 10, 203, 174), width: 1),
+                  borderRadius: BorderRadius.all(Radius.circular(22)),
+                ),
+                child: Column(children: [
+                  Container(
+                    margin: EdgeInsets.only(
+                        top: 30, left: 10, right: 10, bottom: 10),
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage("assets/images/Avatar.png"),
+                      radius: 60,
+                    ),
+                  ),
+                  Text(
+                    "New Community",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Gotham',
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 10, left: 10, right: 10),
+                    child: Text(
+                      "Create a place where you can share all your ideas with other people around the world!",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontFamily: 'Gotham',
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ]),
+              )),
+          Container(
+            color: Colors.transparent,
+            height: 20,
+          ),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AddPost(
+                      username: widget.username,
+                    )));
+              },
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.92,
+                height: MediaQuery.of(context).size.width * 0.7,
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  border: Border.all(
+                      color: Color.fromARGB(255, 10, 203, 174), width: 1),
+                  borderRadius: BorderRadius.all(Radius.circular(22)),
+                ),
+                child: Column(children: [
+                  Container(
+                    margin: EdgeInsets.only(
+                        top: 30, left: 10, right: 10, bottom: 10),
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage("assets/images/Avatar2.png"),
+                      radius: 60,
+                    ),
+                  ),
+                  Text(
+                    "New Post",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Gotham',
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 10, left: 10, right: 10),
+                    child: Text(
+                      "Simply share your ideas and interests with the world!",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontFamily: 'Gotham',
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ]),
+              ))
+        ],
+      ),
+      backgroundColor: Colors.black87,
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.transparent,
+=======
             "New feed",
             style: TextStyle(fontFamily: 'Gotham'),
           )),
@@ -128,6 +249,7 @@ class _NewPostOrCommunityState extends State<NewPostOrCommunity> {
       ),
       backgroundColor: Colors.black87,
       bottomNavigationBar: BottomAppBar(
+>>>>>>> 682bb7f95939602df98310957a67d0a75a816a3d
         child: Container(
           color: Colors.black87,
           child: Row(

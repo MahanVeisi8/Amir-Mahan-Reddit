@@ -57,7 +57,7 @@ class _ShowCommunityPostsState extends State<ShowCommunityPosts> {
                                   top: 10, left: 10, right: 10, bottom: 10),
                               child: CircleAvatar(
                                 backgroundImage:
-                                    AssetImage('assets/images/Avatar2.png'),
+                                AssetImage('assets/images/Avatar2.png'),
                               ),
                             ),
                             Column(children: [

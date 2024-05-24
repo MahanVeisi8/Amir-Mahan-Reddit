@@ -1,3 +1,4 @@
+import 'package:Amir_Mahan_Reddit/BasicClasses/Community.dart';
 import 'package:Amir_Mahan_Reddit/BasicClasses/Post.dart';
 import 'package:Amir_Mahan_Reddit/BasicClasses/Users.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,11 +21,14 @@ class Comment {
     numLikes = 0;
     numDislikes = 0;
   }
+
   void like() {
     numLikes++;
     Likers.add(user);
   }
-
+  void setLike(int x){
+    numLikes = x;
+  }
   void dislike() {
     numDislikes++;
     Dislikers.add(user);
